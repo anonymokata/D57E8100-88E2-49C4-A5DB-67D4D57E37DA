@@ -4,6 +4,10 @@ CC=gcc
 CFLAGS= -Wall
 LIBS=-lcheck -lm -lpthread -lrt
 
+all: $(TEST-SUITE) $(TARGET) 
+	./$(TEST-SUITE)
+	./$(TARGET)
+
 $(TARGET): demo.o calculator.a
 	$(CC) $(CFLAGS)  $^ -o $@
 

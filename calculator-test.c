@@ -1,5 +1,4 @@
 #include <check.h>
-#include <string.h>
 #include "calculator.h"
 
 START_TEST(addtest)
