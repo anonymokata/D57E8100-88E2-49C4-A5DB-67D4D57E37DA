@@ -1,9 +1,9 @@
-char* add()
+char* add(char* romanNumeral1, char* romanNumeral2)
 {
-    return "Add Result";
+    return "II";
 }
 
-char* subtract()
+char* subtract(char romanNumeral1, char romanNumeral2)
 {
     return "Subtract Result";
 }
