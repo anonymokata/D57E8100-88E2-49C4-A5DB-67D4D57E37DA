@@ -1,35 +1,39 @@
 #include <check.h>
 #include "calculator.h"
 
-START_TEST(concatinate_to_add)
+START_TEST(test_concatinate_to_addTest)
 {
   ck_assert_str_eq(add("I","I"),"II");
   ck_assert_str_eq(add("I","II"),"III");
 }
 END_TEST
 
-START_TEST(max_roman_numeral)
+START_TEST(test_sort_by_largest_to_smallest)
+{
+  // ck_assert_str_eq(add("I","V"),"VI");
+  // ck_assert_str_eq(add("XI","CL"),"CLXI");
+  // ck_assert_str_eq(add("XII","CLI"),"CLXIII");
+}
+END_TEST
+
+START_TEST(test_largest_roman_numeralTest)
 {
   ck_assert_str_eq(add("MMDCCCLXXXVII","I"),"MMDCCCLXXXVIII");
 }
 END_TEST
 
-int main(void)
+Suite * make_calculator_suite(void)
 {
-  Suite *s1 = suite_create("Core");
-  TCase *tc1_1 = tcase_create("Core");
-  SRunner *sr = srunner_create(s1);
-  int number_failed;
-  int EXIT_SUCCESS = 0;
-  int EXIT_FAILURE = 1;
+    Suite *s;
+    TCase *tc_core;
 
-  suite_add_tcase(s1, tc1_1);
-  tcase_add_test(tc1_1, concatinate_to_add);
-  tcase_add_test(tc1_1, max_roman_numeral);
+    s = suite_create("Calculator Suite");
+    tc_core = tcase_create("Core");
 
-  srunner_run_all(sr, CK_ENV);
-  number_failed = srunner_ntests_failed(sr);
-  srunner_free(sr);
+    tcase_add_test(tc_core, test_concatinate_to_addTest);
+    tcase_add_test(tc_core, test_sort_by_largest_to_smallest);
+    tcase_add_test(tc_core, test_largest_roman_numeralTest);
+    suite_add_tcase(s, tc_core);
 
-  return number_failed == 0 ? EXIT_SUCCESS : EXIT_FAILURE;
+    return s;
 }
