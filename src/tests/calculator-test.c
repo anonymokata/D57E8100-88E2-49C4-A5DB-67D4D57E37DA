@@ -1,5 +1,5 @@
 #include <check.h>
-#include "calculator.h"
+#include "../main/calculator.h"
 
 START_TEST(test_concatinate_to_addTest)
 {

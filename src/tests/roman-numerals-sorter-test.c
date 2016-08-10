@@ -1,5 +1,5 @@
 #include <check.h>
-#include "roman-numerals-sorter.h"
+#include "../main/roman-numerals-sorter.h"
 
 START_TEST(test_sort_roman_numerals)
 {

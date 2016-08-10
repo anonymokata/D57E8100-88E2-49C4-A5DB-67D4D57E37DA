@@ -1,43 +1,51 @@
-TARGET = demo
+DEMO = demo
 TEST-SUITE = test-suite
 CC=gcc
 CFLAGS= -Wall
+ODIR= obj
+SDIR= src/main
+TDIR= src/tests
+BIN= bin
 LIBS=-lcheck -lm -lpthread -lrt
 
-all: $(TEST-SUITE) $(TARGET)
-	./$(TEST-SUITE)
-	./$(TARGET)
+all: $(TEST-SUITE) $(DEMO)
+	./$(BIN)/$(TEST-SUITE)
+	./$(BIN)/$(DEMO)
 
-$(TARGET): demo.o calculator.a
-	$(CC) $(CFLAGS)  $^ -o $@
+demo: $(ODIR)/demo.o $(ODIR)/calculator.o $(ODIR)/roman-numerals-sorter.o
+	$(CC) $(CFLAGS) -o $(DEMO) $(ODIR)/demo.o $(ODIR)/calculator.o $(ODIR)/roman-numerals-sorter.o
+	mv demo $(BIN)
 
-demo.o: demo.c
-	$(CC) $(CFLAGS)  -c $< -o $@
+$(ODIR)/demo.o: demo.c $(SDIR)/calculator.h
+	$(CC) $(CFLAGS) -c demo.c
+	mv demo.o $(ODIR)
 
-calculator.a: calculator.o roman-numerals-sorter.o
-	ar rcs $@ $^
+$(ODIR)/calculator.o: $(SDIR)/calculator.c
+	$(CC) $(CFLAGS) -c -o $@ $<
 
-calculator.o: calculator.c
-	$(CC) $(CFLAGS)  -c -o $@ $<
-
-roman-numerals-sorter.o: roman-numerals-sorter.c
-	$(CC) $(CFLAGS)  -c -o $@ $<
+$(ODIR)/roman-numerals-sorter.o: $(SDIR)/roman-numerals-sorter.c
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 test: $(TEST-SUITE)
-	./$(TEST-SUITE)
+	./$(BIN)/$(TEST-SUITE)
 
-$(TEST-SUITE): all-tests.o calculator-test.o roman-numerals-sorter-test.o calculator.o roman-numerals-sorter.o
-	$(CC) $(CFLAGS) -o $(TEST-SUITE) all-tests.o calculator-test.o roman-numerals-sorter-test.o calculator.o roman-numerals-sorter.o $(LIBS)
+$(TEST-SUITE): $(ODIR)/all-tests.o $(ODIR)/calculator-test.o $(ODIR)/roman-numerals-sorter-test.o $(ODIR)/calculator.o $(ODIR)/roman-numerals-sorter.o
+	$(CC) $(CFLAGS) -o $(TEST-SUITE) $(ODIR)/all-tests.o $(ODIR)/calculator-test.o $(ODIR)/roman-numerals-sorter-test.o $(ODIR)/calculator.o $(ODIR)/roman-numerals-sorter.o $(LIBS)
+	mv $(TEST-SUITE) $(BIN)
 
-all-tests.o: all-tests.c calculator-test.h roman-numerals-sorter-test.h
-	$(CC) $(CFLAGS) -c all-tests.c
+$(ODIR)/all-tests.o: $(TDIR)/all-tests.c $(TDIR)/calculator-test.h $(TDIR)/roman-numerals-sorter-test.h
+	$(CC) $(CFLAGS) -c $(TDIR)/all-tests.c
+	mv *.o $(ODIR)
 
-calculator-test.o: calculator-test.c calculator.h
-	$(CC) $(CFLAGS) -c calculator-test.c
+$(ODIR)/calculator-test.o: $(TDIR)/calculator-test.c $(SDIR)/calculator.h
+	$(CC) $(CFLAGS) -c $(TDIR)/calculator-test.c
+	mv *.o $(ODIR)
 
-roman-numerals-sorter-test.o: roman-numerals-sorter-test.c roman-numerals-sorter.h
-		$(CC) $(CFLAGS) -c roman-numerals-sorter-test.c
-
+$(ODIR)/roman-numerals-sorter-test.o: $(TDIR)/roman-numerals-sorter-test.c $(SDIR)/roman-numerals-sorter.h
+	$(CC) $(CFLAGS) -c $(TDIR)/roman-numerals-sorter-test.c
+	mv *.o $(ODIR)
 
 clean:
-	rm -f *.o *.a $(TARGET) $(TEST-SUITE)
+	find . -type f -name '*.o' -delete
+	find . -type f -name '*.a' -delete
+	rm bin/*
