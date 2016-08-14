@@ -1,6 +1,7 @@
 #include <check.h>
 #include "calculator-test.h"
 #include "roman-numerals-sorter-test.h"
+#include "roman-numerals-converter-test.h"
 
 int main(void)
 {
@@ -12,6 +13,7 @@ int main(void)
 
   srunner_add_suite (sr, make_calculator_suite());
   srunner_add_suite (sr, make_roman_numerals_sorter_suite());
+  srunner_add_suite (sr, make_roman_numerals_converter_suite());
 
   srunner_run_all(sr, CK_ENV);
   number_failed = srunner_ntests_failed(sr);

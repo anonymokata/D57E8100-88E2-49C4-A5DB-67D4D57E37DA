@@ -12,8 +12,8 @@ all: $(TEST-SUITE) $(DEMO)
 	./$(BIN)/$(TEST-SUITE)
 	./$(BIN)/$(DEMO)
 
-demo: $(ODIR)/demo.o $(ODIR)/calculator.o $(ODIR)/roman-numerals-sorter.o
-	$(CC) $(CFLAGS) -o $(DEMO) $(ODIR)/demo.o $(ODIR)/calculator.o $(ODIR)/roman-numerals-sorter.o
+demo: $(ODIR)/demo.o $(ODIR)/calculator.o $(ODIR)/roman-numerals-sorter.o $(ODIR)/roman-numerals-converter.o
+	$(CC) $(CFLAGS) -o $(DEMO) $(ODIR)/demo.o $(ODIR)/calculator.o $(ODIR)/roman-numerals-sorter.o $(ODIR)/roman-numerals-converter.o
 	mv demo $(BIN)
 
 $(ODIR)/demo.o: demo.c $(SDIR)/calculator.h
@@ -26,14 +26,18 @@ $(ODIR)/calculator.o: $(SDIR)/calculator.c
 $(ODIR)/roman-numerals-sorter.o: $(SDIR)/roman-numerals-sorter.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
+$(ODIR)/roman-numerals-converter.o: $(SDIR)/roman-numerals-converter.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+
 test: $(TEST-SUITE)
 	./$(BIN)/$(TEST-SUITE)
 
-$(TEST-SUITE): $(ODIR)/all-tests.o $(ODIR)/calculator-test.o $(ODIR)/roman-numerals-sorter-test.o $(ODIR)/calculator.o $(ODIR)/roman-numerals-sorter.o
-	$(CC) $(CFLAGS) -o $(TEST-SUITE) $(ODIR)/all-tests.o $(ODIR)/calculator-test.o $(ODIR)/roman-numerals-sorter-test.o $(ODIR)/calculator.o $(ODIR)/roman-numerals-sorter.o $(LIBS)
+$(TEST-SUITE): $(ODIR)/all-tests.o $(ODIR)/calculator-test.o $(ODIR)/roman-numerals-sorter-test.o $(ODIR)/roman-numerals-converter-test.o $(ODIR)/calculator.o $(ODIR)/roman-numerals-sorter.o $(ODIR)/roman-numerals-converter.o
+	$(CC) $(CFLAGS) -o $(TEST-SUITE) $(ODIR)/all-tests.o $(ODIR)/calculator-test.o $(ODIR)/roman-numerals-sorter-test.o $(ODIR)/roman-numerals-converter-test.o $(ODIR)/calculator.o $(ODIR)/roman-numerals-sorter.o $(ODIR)/roman-numerals-converter.o $(LIBS)
 	mv $(TEST-SUITE) $(BIN)
 
-$(ODIR)/all-tests.o: $(TDIR)/all-tests.c $(TDIR)/calculator-test.h $(TDIR)/roman-numerals-sorter-test.h
+$(ODIR)/all-tests.o: $(TDIR)/all-tests.c $(TDIR)/calculator-test.h $(TDIR)/roman-numerals-sorter-test.h $(TDIR)/roman-numerals-converter-test.h
 	$(CC) $(CFLAGS) -c $(TDIR)/all-tests.c
 	mv *.o $(ODIR)
 
@@ -43,6 +47,10 @@ $(ODIR)/calculator-test.o: $(TDIR)/calculator-test.c $(SDIR)/calculator.h
 
 $(ODIR)/roman-numerals-sorter-test.o: $(TDIR)/roman-numerals-sorter-test.c $(SDIR)/roman-numerals-sorter.h
 	$(CC) $(CFLAGS) -c $(TDIR)/roman-numerals-sorter-test.c
+	mv *.o $(ODIR)
+
+$(ODIR)/roman-numerals-converter-test.o: $(TDIR)/roman-numerals-converter-test.c $(SDIR)/roman-numerals-converter.h
+	$(CC) $(CFLAGS) -c $(TDIR)/roman-numerals-converter-test.c
 	mv *.o $(ODIR)
 
 clean:

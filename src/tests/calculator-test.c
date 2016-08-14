@@ -16,6 +16,13 @@ START_TEST(test_sort_by_largest_to_smallest)
 }
 END_TEST
 
+START_TEST(test_with_subtractive_prefix)
+{
+  // ck_assert_str_eq(add("IX","I"),"V");
+  // ck_assert_str_eq(add("IX","III"),"XII");
+}
+END_TEST
+
 START_TEST(test_largest_roman_numeral)
 {
   ck_assert_str_eq(add("MMMDCCCLXXXVII","I"),"MMMDCCCLXXXVIII");
@@ -33,6 +40,7 @@ Suite * make_calculator_suite(void)
     tcase_add_test(tc_core, test_concatinate_to_add);
     tcase_add_test(tc_core, test_sort_by_largest_to_smallest);
     tcase_add_test(tc_core, test_largest_roman_numeral);
+    tcase_add_test(tc_core, test_with_subtractive_prefix);
     suite_add_tcase(s, tc_core);
 
     return s;

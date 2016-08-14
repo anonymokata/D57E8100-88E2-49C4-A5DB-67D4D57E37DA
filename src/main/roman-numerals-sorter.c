@@ -9,7 +9,7 @@ const char *sort_roman_numerals(const char *roman_numerals)
 {
   char romanNumeralsArray[strlen(roman_numerals)];
   strncpy(romanNumeralsArray, roman_numerals, strlen(roman_numerals) + 1);
-  
+
   qsort(romanNumeralsArray, strlen(roman_numerals), sizeof(char), _compareRomanNumerals);
 
   char *result = malloc(sizeof(char)*(sizeof(romanNumeralsArray)+1));
