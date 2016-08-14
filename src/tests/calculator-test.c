@@ -18,8 +18,10 @@ END_TEST
 
 START_TEST(test_with_subtractive_prefix)
 {
-  // ck_assert_str_eq(add("IX","I"),"V");
+  // ck_assert_str_eq(add("IX","I"),"X");
   // ck_assert_str_eq(add("IX","III"),"XII");
+  // ck_assert_str_eq(add("I","IX"),"X");
+  // ck_assert_str_eq(add("III","IX"),"XII");
 }
 END_TEST
 
