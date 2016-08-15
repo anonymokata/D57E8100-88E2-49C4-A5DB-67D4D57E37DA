@@ -3,6 +3,7 @@
 #include <string.h>
 
 int _findPrefixIndex(char *prefixArray[], int arraySize, char *roman_numerals);
+int _numeralsContainsInternalSum(char *roman_numerals,char *internalSumPrefix);
 char *convert_internal_sum(char *roman_numerals);
 
 #define NO_INDEX -1
@@ -19,15 +20,18 @@ char *convert_subtractive_to_additive_prefix(char *roman_numerals){
   return (prefixIndex == NO_INDEX) ? roman_numerals : additivePrefix[prefixIndex];
 }
 
-char *convert_internal_sums(char *roman_numerals){
+char *convert_internal_sums(char *romanNumerals){
   int i;
   for (i = 0; i < INTERNAL_SUM_ARRAY_SIZE; i++) {
-    if(strstr(roman_numerals, internalSumPrefix[i]) != NULL){
-      roman_numerals = replace_substring(roman_numerals, internalSumPrefix[i], internalSumValue[i]);
+    if(_numeralsContainsInternalSum(romanNumerals, internalSumPrefix[i])){
+      romanNumerals = replace_substring(romanNumerals, internalSumPrefix[i], internalSumValue[i]);
     }
   }
+  return romanNumerals;
+}
 
-  return roman_numerals;
+int _numeralsContainsInternalSum(char *roman_numerals,char *internalSumPrefix){
+  return strstr(roman_numerals, internalSumPrefix) != NULL;
 }
 
 int _findPrefixIndex(char *prefixArray[], int arraySize, char *roman_numerals){
