@@ -37,6 +37,14 @@ START_TEST(test_convert_internal_sums_input_has_no_sum)
 }
 END_TEST
 
+START_TEST(test_convert_multiple_internal_sums)
+{
+  ck_assert_str_eq(convert_internal_sums("VIIIII"),"X");
+  ck_assert_str_eq(convert_internal_sums("VIIIIII"),"XI");
+  ck_assert_str_eq(convert_internal_sums("CLXXXXVIIIIIII"),"CCII");
+}
+END_TEST
+
 Suite * make_roman_numerals_converter_suite(void)
 {
     Suite *s;
@@ -49,6 +57,7 @@ Suite * make_roman_numerals_converter_suite(void)
     tcase_add_test(tc_core, test_convert_subtractive_input_has_no_prefix);
     tcase_add_test(tc_core, test_convert_internal_sums);
     tcase_add_test(tc_core, test_convert_internal_sums_input_has_no_sum);
+    tcase_add_test(tc_core, test_convert_multiple_internal_sums);
     suite_add_tcase(s, tc_core);
 
     return s;
