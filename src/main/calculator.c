@@ -13,8 +13,9 @@ char *add(char *roman_numeral1, char *roman_numeral2)
 
     char *combinedNumerals = _concatinate_roman_numerals(additiveNumerals1, additiveNumerals2);
     char *sortnedNumerals = sort_roman_numerals(combinedNumerals);
-
-    return convert_internal_sums(sortnedNumerals);
+    char *internalSumsNumerals = convert_internal_sums(sortnedNumerals);
+    char *subtractivePrefixNumerals = convert_additive_to_subtractive_prefix(internalSumsNumerals);
+    return subtractivePrefixNumerals;
 }
 
 char *_concatinate_roman_numerals(char *roman_numeral1, char *roman_numeral2)
