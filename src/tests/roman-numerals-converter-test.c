@@ -16,7 +16,7 @@ START_TEST(test_convert_to_additive_prefix_substring)
 {
   ck_assert_str_eq(convert_subtractive_to_additive_prefix("XIV"),"XIIII");
   ck_assert_str_eq(convert_subtractive_to_additive_prefix("CXLII"),"CXXXXII");
-  // ck_assert_str_eq(convert_subtractive_to_additive_prefix("CXLIV"),"CXXXXIIII");
+  ck_assert_str_eq(convert_subtractive_to_additive_prefix("CXLIV"),"CXXXXIIII");
 }
 END_TEST
 

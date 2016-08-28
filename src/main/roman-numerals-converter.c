@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "common-utils.h"
 
 int _findPrefixIndex(char *prefixArray[], int arraySize, char *roman_numerals);
 int _numeralsContainsInternalSum(char *roman_numerals,char *internalSumPrefix);

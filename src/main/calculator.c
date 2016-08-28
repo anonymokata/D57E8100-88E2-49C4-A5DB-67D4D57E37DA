@@ -3,6 +3,7 @@
 #include <string.h>
 #include "roman-numerals-sorter.h"
 #include "roman-numerals-converter.h"
+#include "common-utils.h"
 
 char *_concatinate_roman_numerals(char *roman_numeral1, char *roman_numeral2);
 

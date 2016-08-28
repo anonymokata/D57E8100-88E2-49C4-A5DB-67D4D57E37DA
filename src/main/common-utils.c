@@ -5,7 +5,7 @@
 char *replace_substring(char *inputString, char *substring, char *replaceWith)
 {
   char *result = malloc(1000);
-  memset(result, '\0', sizeof(result));
+  memset(result, '\0', strlen(result));
 
   char beforeSubstring[200];
   memset(beforeSubstring, '\0', sizeof(beforeSubstring));
