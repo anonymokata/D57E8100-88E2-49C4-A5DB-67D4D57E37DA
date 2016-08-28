@@ -16,6 +16,14 @@ START_TEST(test_replace_entire_string)
 }
 END_TEST
 
+START_TEST(test_concatenate_string)
+{
+  ck_assert_str_eq(concatenate("foo", "bar"), "foobar");
+  ck_assert_str_eq(concatenate("short", " loooooooooooong"), "short loooooooooooong");
+  ck_assert_str_eq(concatenate("loooooooooooong ", "short"), "loooooooooooong short");
+}
+END_TEST
+
 Suite * make_common_utils_suite(void)
 {
     Suite *s;
@@ -24,8 +32,11 @@ Suite * make_common_utils_suite(void)
     s = suite_create("Common Utils Suite");
     tc_core = tcase_create("Core");
 
+
     tcase_add_test(tc_core, test_replace_substring);
     tcase_add_test(tc_core, test_replace_entire_string);
+    tcase_add_test(tc_core, test_concatenate_string);
+
     suite_add_tcase(s, tc_core);
 
     return s;
