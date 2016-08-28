@@ -12,9 +12,9 @@ int main(void)
   int EXIT_SUCCESS = 0;
   int EXIT_FAILURE = 1;
 
-  // srunner_add_suite (sr, make_calculator_suite());
-  // srunner_add_suite (sr, make_roman_numerals_sorter_suite());
-  // srunner_add_suite (sr, make_roman_numerals_converter_suite());
+  srunner_add_suite (sr, make_calculator_suite());
+  srunner_add_suite (sr, make_roman_numerals_sorter_suite());
+  srunner_add_suite (sr, make_roman_numerals_converter_suite());
   srunner_add_suite (sr, make_common_utils_suite());
 
   srunner_run_all(sr, CK_ENV);

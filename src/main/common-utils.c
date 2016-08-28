@@ -4,7 +4,7 @@
 
 char *replace_substring(char *inputString, char *substring, char *replaceWith)
 {
-  char *result[1000];
+  char *result = malloc(1000);
   memset(result, '\0', sizeof(result));
 
   char beforeSubstring[200];
