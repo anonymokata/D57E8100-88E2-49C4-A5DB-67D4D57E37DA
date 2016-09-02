@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static char *concatenateResult(char *beforeSubstring, char *replaceWithString, char *afterSubstring);
+static char *concatenateReplaceSubstring(char *beforeSubstring, char *replaceWithString, char *afterSubstring);
 static char *makeBeforeSubstring(const char *copyOfInput, char *substring, char *beforeSubstring);
 static char *makeAfterSubstring(const char *copyOfInput, char *substring, char *afterSubstring);
 
@@ -17,10 +17,10 @@ char *replaceSubstring(char *inputString, char *substring, char *replaceWithStri
   char afterSubstring[200] = {'\0'};
   makeAfterSubstring(copyOfInput, substring, afterSubstring);
 
-  return concatenateResult(beforeSubstring, replaceWithString, afterSubstring);
+  return concatenateReplaceSubstring(beforeSubstring, replaceWithString, afterSubstring);
 }
 
-char *concatenate(char *roman_numeral1, char *roman_numeral2)
+char *concatenate(char* roman_numeral1, char* roman_numeral2)
 {
   char *result = calloc(1000, sizeof(char));
 
@@ -46,7 +46,7 @@ static char *makeBeforeSubstring(const char *copyOfInput, char *substring, char 
   return beforeSubstring;
 }
 
-static char *concatenateResult(char *beforeSubstring, char *replaceWithString, char *afterSubstring){
+static char *concatenateReplaceSubstring(char *beforeSubstring, char *replaceWithString, char *afterSubstring){
   char *result = calloc(1000, sizeof(char));
   strcat(result, beforeSubstring);
   strcat(result, replaceWithString);
