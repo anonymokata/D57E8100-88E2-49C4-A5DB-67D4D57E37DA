@@ -21,7 +21,7 @@ char *convert_subtractive_to_additive_prefix(char *romanNumerals){
   int i;
   for (i = 0; i < SUBTRACTIVE_PREFIX_ARRAY_SIZE; i++) {
     if(_numeralsContainsSubtractivePrefix(romanNumerals, subtractivePrefix[i])){
-      romanNumerals = replace_substring(romanNumerals, subtractivePrefix[i], additivePrefix[i]);
+      romanNumerals = replaceSubstring(romanNumerals, subtractivePrefix[i], additivePrefix[i]);
     }
   }
   return romanNumerals;
@@ -34,7 +34,7 @@ char *convert_additive_to_subtractive_prefix(char *romanNumerals){
   int i;
   for (i = ADDITIVE_PREFIX_ARRAY_SIZE - 1; i >= 0; i--) {
     if(_numeralsContainsAdditivePrefix(romanNumerals, additivePrefix[i])){
-      romanNumerals = replace_substring(romanNumerals, additivePrefix[i], subtractivePrefix[i]);
+      romanNumerals = replaceSubstring(romanNumerals, additivePrefix[i], subtractivePrefix[i]);
     }
   }
   return romanNumerals;
@@ -47,7 +47,7 @@ char *convert_internal_sums(char *romanNumerals){
   int i;
   for (i = 0; i < INTERNAL_SUM_ARRAY_SIZE; i++) {
     if(_numeralsContainsInternalSum(romanNumerals, internalSumPrefix[i])){
-      romanNumerals = replace_substring(romanNumerals, internalSumPrefix[i], internalSumValue[i]);
+      romanNumerals = replaceSubstring(romanNumerals, internalSumPrefix[i], internalSumValue[i]);
     }
   }
   return romanNumerals;

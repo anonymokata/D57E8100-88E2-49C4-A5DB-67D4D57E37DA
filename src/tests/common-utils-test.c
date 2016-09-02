@@ -1,18 +1,18 @@
 #include <check.h>
 #include "../main/common-utils.h"
 
-START_TEST(test_replace_substring)
+START_TEST(test_replaceSubstring)
 {
-  ck_assert_str_eq(replace_substring("Hello World", "World", "Michigan"),"Hello Michigan");
-  ck_assert_str_eq(replace_substring("Hello World. Hello Universe", "World", "Michigan"),"Hello Michigan. Hello Universe");
-  ck_assert_str_eq(replace_substring("CXLIIII", "XL", "XXXX"),"CXXXXIIII");
-  ck_assert_str_eq(replace_substring("A", "A", "ABC"),"ABC");
+  ck_assert_str_eq(replaceSubstring("Hello World", "World", "Michigan"),"Hello Michigan");
+  ck_assert_str_eq(replaceSubstring("Hello World. Hello Universe", "World", "Michigan"),"Hello Michigan. Hello Universe");
+  ck_assert_str_eq(replaceSubstring("CXLIIII", "XL", "XXXX"),"CXXXXIIII");
+  ck_assert_str_eq(replaceSubstring("A", "A", "ABC"),"ABC");
 }
 END_TEST
 
 START_TEST(test_replace_entire_string)
 {
-  ck_assert_str_eq(replace_substring("Hello", "Hello", "World"),"World");
+  ck_assert_str_eq(replaceSubstring("Hello", "Hello", "World"),"World");
 }
 END_TEST
 
@@ -33,7 +33,7 @@ Suite * make_common_utils_suite(void)
     tc_core = tcase_create("Core");
 
 
-    tcase_add_test(tc_core, test_replace_substring);
+    tcase_add_test(tc_core, test_replaceSubstring);
     tcase_add_test(tc_core, test_replace_entire_string);
     tcase_add_test(tc_core, test_concatenate_string);
 

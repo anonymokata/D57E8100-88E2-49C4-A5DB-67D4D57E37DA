@@ -6,7 +6,7 @@ static char *concatenateResult(char *beforeSubstring, char *replaceWithString, c
 static char *makeBeforeSubstring(const char *copyOfInput, char *substring, char *beforeSubstring);
 static char *makeAfterSubstring(const char *copyOfInput, char *substring, char *afterSubstring);
 
-char *replace_substring(char *inputString, char *substring, char *replaceWithString)
+char *replaceSubstring(char *inputString, char *substring, char *replaceWithString)
 {
   char copyOfInput[200] = {'\0'};
   strcpy(copyOfInput, inputString);
