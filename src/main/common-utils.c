@@ -2,41 +2,54 @@
 #include <stdlib.h>
 #include <string.h>
 
-char *replace_substring(char *inputString, char *substring, char *replaceWith)
+static char *concatenateResult(char *beforeSubstring, char *replaceWithString, char *afterSubstring);
+static char *makeBeforeSubstring(const char *copyOfInput, char *substring, char *beforeSubstring);
+static char *makeAfterSubstring(const char *copyOfInput, char *substring, char *afterSubstring);
+
+char *replace_substring(char *inputString, char *substring, char *replaceWithString)
 {
-  char *result = malloc(1000);
-  memset(result, '\0', strlen(result));
+  char copyOfInput[200] = {'\0'};
+  strcpy(copyOfInput, inputString);
 
-  char beforeSubstring[200];
-  memset(beforeSubstring, '\0', sizeof(beforeSubstring));
+  char beforeSubstring[200] = {'\0'};
+  makeBeforeSubstring(copyOfInput, substring,beforeSubstring);
 
-  char afterSubstring[200];
-  memset(afterSubstring, '\0', sizeof(afterSubstring));
+  char afterSubstring[200] = {'\0'};
+  makeAfterSubstring(copyOfInput, substring, afterSubstring);
 
-  char inputCopy[200];
-  memset(inputCopy, '\0', sizeof(inputCopy));
-  strcpy(inputCopy, inputString);
-
-  char *substringStart = strstr(inputCopy, substring);
-  strncpy(beforeSubstring, inputString, substringStart - inputCopy);
-
-  char *afterSubstringStart = substringStart + strlen(substring);
-  strcpy(afterSubstring, afterSubstringStart);
-
-  strcat(result, beforeSubstring);
-  strcat(result, replaceWith);
-  strcat(result, afterSubstring);
-  return result;
+  return concatenateResult(beforeSubstring, replaceWithString, afterSubstring);
 }
 
 char *concatenate(char *roman_numeral1, char *roman_numeral2)
 {
-  char *result[1000];
-  memset(result, '\0', sizeof(result));
+  char *result = calloc(1000, sizeof(char));
 
   strcat(result, roman_numeral1);
   strcat(result, roman_numeral2);
 
   return result;
+}
 
+static char *makeAfterSubstring(const char *copyOfInput, char *substring, char *afterSubstring){
+  char *startOfSubstring = strstr(copyOfInput, substring);
+  char *endOfSubstring = startOfSubstring + strlen(substring);
+
+  strcpy(afterSubstring, endOfSubstring);
+
+  return afterSubstring;
+}
+
+static char *makeBeforeSubstring(const char *copyOfInput, char *substring, char *beforeSubstring){
+  char *startOfSubstring = strstr(copyOfInput, substring);
+  strncpy(beforeSubstring, copyOfInput, startOfSubstring - copyOfInput);
+
+  return beforeSubstring;
+}
+
+static char *concatenateResult(char *beforeSubstring, char *replaceWithString, char *afterSubstring){
+  char *result = calloc(1000, sizeof(char));
+  strcat(result, beforeSubstring);
+  strcat(result, replaceWithString);
+  strcat(result, afterSubstring);
+  return result;
 }
