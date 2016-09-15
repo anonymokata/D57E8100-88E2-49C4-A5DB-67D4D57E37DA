@@ -20,12 +20,12 @@ char *replaceSubstring(char *inputString, char *substring, char *replaceWithStri
   return concatenateReplaceSubstring(beforeSubstring, replaceWithString, afterSubstring);
 }
 
-char *concatenate(char* roman_numeral1, char* roman_numeral2)
+char *concatenate(char* romanNumeral1, char* romanNumeral2)
 {
   char *result = calloc(1000, sizeof(char));
 
-  strcat(result, roman_numeral1);
-  strcat(result, roman_numeral2);
+  strcat(result, romanNumeral1);
+  strcat(result, romanNumeral2);
 
   return result;
 }

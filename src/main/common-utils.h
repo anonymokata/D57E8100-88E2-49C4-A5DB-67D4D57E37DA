@@ -2,7 +2,7 @@
 #define COMMON_UTILS_H_
 
 char *replaceSubstring(char *inputString, char *substring, char *replaceWith);
-char *concatenate(char *roman_numeral1, char *roman_numeral2);
+char *concatenate(char *romanNumeral1, char *romanNumeral2);
 
 
 #endif

@@ -3,11 +3,10 @@
 #include <string.h>
 #include "common-utils.h"
 
-int _findPrefixIndex(char *prefixArray[], int arraySize, char *romanNumerals);
-int _numeralsContainsInternalSum(char *romanNumerals,char *internalSumPrefix);
-int _numeralsContainsAdditivePrefix(char *romanNumerals,char *additivePrefix);
-int _numeralsContainsSubtractivePrefix(char *romanNumerals,char *subtractivePrefix);
-char *convertInternalSum(char *romanNumerals);
+static int findPrefixIndex(char *prefixArray[], int arraySize, char *romanNumerals);
+static int numeralsContainsInternalSum(char *romanNumerals,char *internalSumPrefix);
+static int numeralsContainsAdditivePrefix(char *romanNumerals,char *additivePrefix);
+static int numeralsContainsSubtractivePrefix(char *romanNumerals,char *subtractivePrefix);
 
 #define NO_INDEX -1
 #define SUBTRACTIVE_PREFIX_ARRAY_SIZE 6
@@ -20,7 +19,7 @@ char *convertSubtractiveToAdditivePrefix(char *romanNumerals){
 
   int i;
   for (i = 0; i < SUBTRACTIVE_PREFIX_ARRAY_SIZE; i++) {
-    if(_numeralsContainsSubtractivePrefix(romanNumerals, subtractivePrefix[i])){
+    if(numeralsContainsSubtractivePrefix(romanNumerals, subtractivePrefix[i])){
       romanNumerals = replaceSubstring(romanNumerals, subtractivePrefix[i], additivePrefix[i]);
     }
   }
@@ -33,7 +32,7 @@ char *convertAdditiveToSubtractivePrefix(char *romanNumerals){
 
   int i;
   for (i = ADDITIVE_PREFIX_ARRAY_SIZE - 1; i >= 0; i--) {
-    if(_numeralsContainsAdditivePrefix(romanNumerals, additivePrefix[i])){
+    if(numeralsContainsAdditivePrefix(romanNumerals, additivePrefix[i])){
       romanNumerals = replaceSubstring(romanNumerals, additivePrefix[i], subtractivePrefix[i]);
     }
   }
@@ -46,26 +45,26 @@ char *convertInternalSums(char *romanNumerals){
 
   int i;
   for (i = 0; i < INTERNAL_SUM_ARRAY_SIZE; i++) {
-    if(_numeralsContainsInternalSum(romanNumerals, internalSumPrefix[i])){
+    if(numeralsContainsInternalSum(romanNumerals, internalSumPrefix[i])){
       romanNumerals = replaceSubstring(romanNumerals, internalSumPrefix[i], internalSumValue[i]);
     }
   }
   return romanNumerals;
 }
 
-int _numeralsContainsInternalSum(char *romanNumerals,char *internalSumPrefix){
+int numeralsContainsInternalSum(char *romanNumerals,char *internalSumPrefix){
   return strstr(romanNumerals, internalSumPrefix) != NULL;
 }
 
-int _numeralsContainsAdditivePrefix(char *romanNumerals,char *additivePrefix){
+int numeralsContainsAdditivePrefix(char *romanNumerals,char *additivePrefix){
   return strstr(romanNumerals, additivePrefix) != NULL;
 }
 
-int _numeralsContainsSubtractivePrefix(char *romanNumerals,char *subtractivePrefix){
+int numeralsContainsSubtractivePrefix(char *romanNumerals,char *subtractivePrefix){
   return strstr(romanNumerals, subtractivePrefix) != NULL;
-}
 
-int _findPrefixIndex(char *prefixArray[], int arraySize, char *romanNumerals){
+}
+int findPrefixIndex(char *prefixArray[], int arraySize, char *romanNumerals){
   int prefixIndex = NO_INDEX;
   int i;
   for (i = 0; i < arraySize; i++) {
