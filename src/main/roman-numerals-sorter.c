@@ -5,12 +5,12 @@
 int _getValueOfRomanNumeral(char romanNumeral);
 int _compareRomanNumerals(const void * a, const void * b);
 
-const char *sort_roman_numerals(const char *roman_numerals)
+const char *sortRomanNumerals(const char *romanNumerals)
 {
-  char romanNumeralsArray[strlen(roman_numerals)];
-  strncpy(romanNumeralsArray, roman_numerals, strlen(roman_numerals) + 1);
+  char romanNumeralsArray[strlen(romanNumerals)];
+  strncpy(romanNumeralsArray, romanNumerals, strlen(romanNumerals) + 1);
 
-  qsort(romanNumeralsArray, strlen(roman_numerals), sizeof(char), _compareRomanNumerals);
+  qsort(romanNumeralsArray, strlen(romanNumerals), sizeof(char), _compareRomanNumerals);
 
   char *result = malloc(sizeof(char)*(sizeof(romanNumeralsArray)+1));
   strcpy(result,romanNumeralsArray);
