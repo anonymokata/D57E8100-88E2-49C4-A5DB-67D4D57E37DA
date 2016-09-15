@@ -1,7 +1,7 @@
 #include <check.h>
 #include "../main/roman-numerals-converter.h"
 
-START_TEST(test_convert_to_additive_prefixes)
+START_TEST(testConvertToAdditivePrefixes)
 {
   ck_assert_str_eq(convertSubtractiveToAdditivePrefix("IV"),"IIII");
   ck_assert_str_eq(convertSubtractiveToAdditivePrefix("IX"),"VIIII");
@@ -12,7 +12,7 @@ START_TEST(test_convert_to_additive_prefixes)
 }
 END_TEST
 
-START_TEST(test_convert_to_additive_prefix_substring)
+START_TEST(testConvertToAdditivePrefixSubstring)
 {
   ck_assert_str_eq(convertSubtractiveToAdditivePrefix("XIV"),"XIIII");
   ck_assert_str_eq(convertSubtractiveToAdditivePrefix("CXLII"),"CXXXXII");
@@ -20,14 +20,14 @@ START_TEST(test_convert_to_additive_prefix_substring)
 }
 END_TEST
 
-START_TEST(test_convert_subtractive_input_has_no_prefix)
+START_TEST(testConvertSubtractiveInputHasNoPrefix)
 {
   ck_assert_str_eq(convertSubtractiveToAdditivePrefix("ECHO"),"ECHO");
   ck_assert_str_eq(convertSubtractiveToAdditivePrefix("III"),"III");
 }
 END_TEST
 
-START_TEST(test_convertInternalSums)
+START_TEST(testConvertInternalSums)
 {
   ck_assert_str_eq(convertInternalSums("IIIII"),"V");
   ck_assert_str_eq(convertInternalSums("VV"),"X");
@@ -38,14 +38,14 @@ START_TEST(test_convertInternalSums)
 }
 END_TEST
 
-START_TEST(test_convertInternalSums_input_has_no_sum)
+START_TEST(testConvertInternalSumsInputHasNoSum)
 {
   ck_assert_str_eq(convertSubtractiveToAdditivePrefix("ECHO"),"ECHO");
   ck_assert_str_eq(convertSubtractiveToAdditivePrefix("III"),"III");
 }
 END_TEST
 
-START_TEST(test_convert_multiple_internal_sums)
+START_TEST(testConvertMultipleInternalSums)
 {
   ck_assert_str_eq(convertInternalSums("VIIIII"),"X");
   ck_assert_str_eq(convertInternalSums("VIIIIII"),"XI");
@@ -53,7 +53,7 @@ START_TEST(test_convert_multiple_internal_sums)
 }
 END_TEST
 
-START_TEST(test_convert_to_subtractive_prefix)
+START_TEST(testConvertToSubtractivePrefix)
 {
   ck_assert_str_eq(convertAdditiveToSubtractivePrefix("IIII"),"IV");
   ck_assert_str_eq(convertAdditiveToSubtractivePrefix("VIIII"),"IX");
@@ -64,7 +64,7 @@ START_TEST(test_convert_to_subtractive_prefix)
 }
 END_TEST
 
-START_TEST(test_convert_to_subtractive_prefix_substring)
+START_TEST(testConvertToSubtractivePrefix_substring)
 {
   ck_assert_str_eq(convertAdditiveToSubtractivePrefix("XIIII"),"XIV");
   ck_assert_str_eq(convertAdditiveToSubtractivePrefix("CXXXXII"),"CXLII");
@@ -72,7 +72,7 @@ START_TEST(test_convert_to_subtractive_prefix_substring)
 }
 END_TEST
 
-Suite * make_roman_numerals_converter_suite(void)
+Suite * makeRomanNumeralsConverterSuite(void)
 {
     Suite *s;
     TCase *tc_core;
@@ -80,14 +80,14 @@ Suite * make_roman_numerals_converter_suite(void)
     s = suite_create("Roman Numerals Converter Suite");
     tc_core = tcase_create("Core");
 
-    tcase_add_test(tc_core, test_convert_to_additive_prefixes);
-    tcase_add_test(tc_core, test_convert_to_additive_prefix_substring);
-    tcase_add_test(tc_core, test_convert_subtractive_input_has_no_prefix);
-    tcase_add_test(tc_core, test_convertInternalSums);
-    tcase_add_test(tc_core, test_convertInternalSums_input_has_no_sum);
-    tcase_add_test(tc_core, test_convert_multiple_internal_sums);
-    tcase_add_test(tc_core, test_convert_to_subtractive_prefix);
-    tcase_add_test(tc_core, test_convert_to_subtractive_prefix_substring);
+    tcase_add_test(tc_core, testConvertToAdditivePrefixes);
+    tcase_add_test(tc_core, testConvertToAdditivePrefixSubstring);
+    tcase_add_test(tc_core, testConvertSubtractiveInputHasNoPrefix);
+    tcase_add_test(tc_core, testConvertInternalSums);
+    tcase_add_test(tc_core, testConvertInternalSumsInputHasNoSum);
+    tcase_add_test(tc_core, testConvertMultipleInternalSums);
+    tcase_add_test(tc_core, testConvertToSubtractivePrefix);
+    tcase_add_test(tc_core, testConvertToSubtractivePrefix_substring);
     suite_add_tcase(s, tc_core);
 
     return s;

@@ -1,14 +1,14 @@
 #include <check.h>
 #include "../main/calculator.h"
 
-START_TEST(test_add_by_concatinating)
+START_TEST(testAddByConcatinating)
 {
   ck_assert_str_eq(add("I","I"),"II");
   ck_assert_str_eq(add("I","II"),"III");
 }
 END_TEST
 
-START_TEST(test_add_sort_by_largest_to_smallest)
+START_TEST(testAddSortByLargestToSmallest)
 {
   ck_assert_str_eq(add("I","V"),"VI");
   ck_assert_str_eq(add("XI","CL"),"CLXI");
@@ -16,7 +16,7 @@ START_TEST(test_add_sort_by_largest_to_smallest)
 }
 END_TEST
 
-START_TEST(test_add_convert_to_subtractive_prefix)
+  START_TEST(testAddConvertToSubtractivePrefix)
 {
   ck_assert_str_eq(add("IX","I"),"X");
   ck_assert_str_eq(add("IX","IX"),"XVIII");
@@ -26,19 +26,19 @@ START_TEST(test_add_convert_to_subtractive_prefix)
 }
 END_TEST
 
-START_TEST(test_add_convert_back_to_subtractive)
+START_TEST(testAddConvertBackToSubtractive)
 {
   ck_assert_str_eq(add("CXXIII","LXIX"),"CXCII");
 }
 END_TEST
 
-START_TEST(test_add_largest_roman_numeral)
+START_TEST(testAddLargestRomanNumeral)
 {
   ck_assert_str_eq(add("MMMDCCCLXXXVII","I"),"MMMDCCCLXXXVIII");
 }
 END_TEST
 
-Suite * make_calculator_suite(void)
+Suite * makeCalculatorSuite(void)
 {
     Suite *s;
     TCase *tc_core;
@@ -46,11 +46,11 @@ Suite * make_calculator_suite(void)
     s = suite_create("Calculator Suite");
     tc_core = tcase_create("Core");
 
-    tcase_add_test(tc_core, test_add_by_concatinating);
-    tcase_add_test(tc_core, test_add_sort_by_largest_to_smallest);
-    tcase_add_test(tc_core, test_add_convert_to_subtractive_prefix);
-    tcase_add_test(tc_core, test_add_convert_back_to_subtractive);
-    tcase_add_test(tc_core, test_add_largest_roman_numeral);
+    tcase_add_test(tc_core, testAddByConcatinating);
+    tcase_add_test(tc_core, testAddSortByLargestToSmallest);
+    tcase_add_test(tc_core, testAddConvertToSubtractivePrefix);
+    tcase_add_test(tc_core, testAddConvertBackToSubtractive);
+    tcase_add_test(tc_core, testAddLargestRomanNumeral);
     suite_add_tcase(s, tc_core);
 
     return s;
