@@ -75,20 +75,20 @@ END_TEST
 Suite * makeRomanNumeralsConverterSuite(void)
 {
     Suite *s;
-    TCase *tc_core;
+    TCase *tcCore;
 
     s = suite_create("Roman Numerals Converter Suite");
-    tc_core = tcase_create("Core");
+    tcCore = tcase_create("Core");
 
-    tcase_add_test(tc_core, testConvertToAdditivePrefixes);
-    tcase_add_test(tc_core, testConvertToAdditivePrefixSubstring);
-    tcase_add_test(tc_core, testConvertSubtractiveInputHasNoPrefix);
-    tcase_add_test(tc_core, testConvertInternalSums);
-    tcase_add_test(tc_core, testConvertInternalSumsInputHasNoSum);
-    tcase_add_test(tc_core, testConvertMultipleInternalSums);
-    tcase_add_test(tc_core, testConvertToSubtractivePrefix);
-    tcase_add_test(tc_core, testConvertToSubtractivePrefix_substring);
-    suite_add_tcase(s, tc_core);
+    tcase_add_test(tcCore, testConvertToAdditivePrefixes);
+    tcase_add_test(tcCore, testConvertToAdditivePrefixSubstring);
+    tcase_add_test(tcCore, testConvertSubtractiveInputHasNoPrefix);
+    tcase_add_test(tcCore, testConvertInternalSums);
+    tcase_add_test(tcCore, testConvertInternalSumsInputHasNoSum);
+    tcase_add_test(tcCore, testConvertMultipleInternalSums);
+    tcase_add_test(tcCore, testConvertToSubtractivePrefix);
+    tcase_add_test(tcCore, testConvertToSubtractivePrefix_substring);
+    suite_add_tcase(s, tcCore);
 
     return s;
 }

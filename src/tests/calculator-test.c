@@ -41,17 +41,17 @@ END_TEST
 Suite * makeCalculatorSuite(void)
 {
     Suite *s;
-    TCase *tc_core;
+    TCase *tcCore;
 
     s = suite_create("Calculator Suite");
-    tc_core = tcase_create("Core");
+    tcCore = tcase_create("Core");
 
-    tcase_add_test(tc_core, testAddByConcatinating);
-    tcase_add_test(tc_core, testAddSortByLargestToSmallest);
-    tcase_add_test(tc_core, testAddConvertToSubtractivePrefix);
-    tcase_add_test(tc_core, testAddConvertBackToSubtractive);
-    tcase_add_test(tc_core, testAddLargestRomanNumeral);
-    suite_add_tcase(s, tc_core);
+    tcase_add_test(tcCore, testAddByConcatinating);
+    tcase_add_test(tcCore, testAddSortByLargestToSmallest);
+    tcase_add_test(tcCore, testAddConvertToSubtractivePrefix);
+    tcase_add_test(tcCore, testAddConvertBackToSubtractive);
+    tcase_add_test(tcCore, testAddLargestRomanNumeral);
+    suite_add_tcase(s, tcCore);
 
     return s;
 }

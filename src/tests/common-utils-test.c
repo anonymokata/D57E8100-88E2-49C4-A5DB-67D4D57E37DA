@@ -27,17 +27,17 @@ END_TEST
 Suite * makeCommonUtilsSuite(void)
 {
     Suite *s;
-    TCase *tc_core;
+    TCase *tcCore;
 
     s = suite_create("Common Utils Suite");
-    tc_core = tcase_create("Core");
+    tcCore = tcase_create("Core");
 
 
-    tcase_add_test(tc_core, testReplaceSubstring);
-    tcase_add_test(tc_core, testReplaceEntireString);
-    tcase_add_test(tc_core, testConcatenateString);
+    tcase_add_test(tcCore, testReplaceSubstring);
+    tcase_add_test(tcCore, testReplaceEntireString);
+    tcase_add_test(tcCore, testConcatenateString);
 
-    suite_add_tcase(s, tc_core);
+    suite_add_tcase(s, tcCore);
 
     return s;
 }

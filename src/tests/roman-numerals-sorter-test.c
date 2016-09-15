@@ -20,14 +20,14 @@ END_TEST
 Suite * makeRomanNumeralsSorterSuite(void)
 {
     Suite *s;
-    TCase *tc_core;
+    TCase *tcCore;
 
     s = suite_create("Roman Numerals Sorter Suite");
-    tc_core = tcase_create("Core");
+    tcCore = tcase_create("Core");
 
-    tcase_add_test(tc_core, testSortRomanNumerals);
-    tcase_add_test(tc_core, testSortLongestRomanNumerals);
-    suite_add_tcase(s, tc_core);
+    tcase_add_test(tcCore, testSortRomanNumerals);
+    tcase_add_test(tcCore, testSortLongestRomanNumerals);
+    suite_add_tcase(s, tcCore);
 
     return s;
 }
