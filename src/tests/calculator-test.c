@@ -16,7 +16,7 @@ START_TEST(testAddSortByLargestToSmallest)
 }
 END_TEST
 
-  START_TEST(testAddConvertToSubtractivePrefix)
+START_TEST(testAddConvertToSubtractivePrefix)
 {
   ck_assert_str_eq(add("IX","I"),"X");
   ck_assert_str_eq(add("IX","IX"),"XVIII");
@@ -32,9 +32,15 @@ START_TEST(testAddConvertBackToSubtractive)
 }
 END_TEST
 
-START_TEST(testAddLargestRomanNumeral)
+START_TEST(testAddOneToMakeLongestRomanNumeral)
 {
   ck_assert_str_eq(add("MMMDCCCLXXXVII","I"),"MMMDCCCLXXXVIII");
+}
+END_TEST
+
+START_TEST(testAddOneToMakeLargesttRomanNumeral)
+{
+  ck_assert_str_eq(add("MMMCMXCVIII","I"),"MMMCMXCIX");
 }
 END_TEST
 
@@ -50,7 +56,8 @@ Suite * makeCalculatorSuite(void)
     tcase_add_test(tcCore, testAddSortByLargestToSmallest);
     tcase_add_test(tcCore, testAddConvertToSubtractivePrefix);
     tcase_add_test(tcCore, testAddConvertBackToSubtractive);
-    tcase_add_test(tcCore, testAddLargestRomanNumeral);
+    tcase_add_test(tcCore, testAddOneToMakeLongestRomanNumeral);
+    tcase_add_test(tcCore, testAddOneToMakeLargesttRomanNumeral);
     suite_add_tcase(s, tcCore);
 
     return s;
