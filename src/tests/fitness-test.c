@@ -24,8 +24,6 @@ START_TEST(testAddData)
       strcat(secondNumeral, getfield(strdup(line), 2));
       strcat(expectedNumeral, getfield(strdup(line), 3));
 
-
-      printf("add : %s + %s = %s\n", firstNumeral, secondNumeral, expectedNumeral);
       strcat(actualNumeral, add(firstNumeral, secondNumeral));
       strcat(actualNumeral, "\n");
 
