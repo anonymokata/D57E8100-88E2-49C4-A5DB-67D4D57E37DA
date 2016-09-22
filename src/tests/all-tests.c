@@ -3,6 +3,7 @@
 #include "roman-numerals-sorter-test.h"
 #include "roman-numerals-converter-test.h"
 #include "common-utils-test.h"
+#include "fitness-test.h"
 
 int main(void)
 {
@@ -16,6 +17,7 @@ int main(void)
   srunner_add_suite (sr, makeRomanNumeralsSorterSuite());
   srunner_add_suite (sr, makeRomanNumeralsConverterSuite());
   srunner_add_suite (sr, makeCommonUtilsSuite());
+  srunner_add_suite (sr, makeFitnessSuite());
 
   srunner_run_all(sr, CK_ENV);
   number_failed = srunner_ntests_failed(sr);
