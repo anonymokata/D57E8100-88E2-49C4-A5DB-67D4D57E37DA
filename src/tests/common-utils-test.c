@@ -16,6 +16,12 @@ START_TEST(testReplaceEntireString)
 }
 END_TEST
 
+START_TEST(testReplaceStringThatDoesNotExistReturnsInput)
+{
+  ck_assert_str_eq(replaceSubstring("substring is not here", "foo", "bar"),"substring is not here");
+}
+END_TEST
+
 START_TEST(testConcatenateString)
 {
   ck_assert_str_eq(concatenate("foo", "bar"), "foobar");
@@ -35,6 +41,7 @@ Suite * makeCommonUtilsSuite(void)
 
     tcase_add_test(tcCore, testReplaceSubstring);
     tcase_add_test(tcCore, testReplaceEntireString);
+    tcase_add_test(tcCore, testReplaceStringThatDoesNotExistReturnsInput);
     tcase_add_test(tcCore, testConcatenateString);
 
     suite_add_tcase(s, tcCore);

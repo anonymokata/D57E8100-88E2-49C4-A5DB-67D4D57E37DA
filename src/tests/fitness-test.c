@@ -14,12 +14,10 @@ START_TEST(testAddData)
   while (fgets(line, 1024, stream))
   {
 
-      char* tmp = strdup(line);
-
-      char *firstNumeral = calloc(1000, sizeof(char));
-      char *secondNumeral = calloc(1000, sizeof(char));
-      char *expectedNumeral = calloc(1000, sizeof(char));
-      char *actualNumeral = calloc(1000, sizeof(char));
+      char *firstNumeral = calloc(100, sizeof(char));
+      char *secondNumeral = calloc(100, sizeof(char));
+      char *expectedNumeral = calloc(100, sizeof(char));
+      char *actualNumeral = calloc(100, sizeof(char));
       strcat(firstNumeral, getfield(strdup(line), 1));
       strcat(secondNumeral, getfield(strdup(line), 2));
       strcat(expectedNumeral, getfield(strdup(line), 3));
@@ -28,7 +26,10 @@ START_TEST(testAddData)
       strcat(actualNumeral, "\n");
 
       ck_assert_str_eq(actualNumeral, expectedNumeral);
-      free(tmp);
+      free(firstNumeral);
+      free(secondNumeral);
+      free(actualNumeral);
+      free(expectedNumeral);
   }
 }
 END_TEST

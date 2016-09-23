@@ -2,22 +2,22 @@
 #include <stdlib.h>
 #include <string.h>
 
-static char *concatenateReplaceSubstring(char *beforeSubstring, char *replaceWithString, char *afterSubstring);
+static char *concatenateReplaceSubstring(char *beforeSubstring, char *replaceWithString, char *afterSubstring, char *result);
 static char *makeBeforeSubstring(const char *copyOfInput, char *substring, char *beforeSubstring);
 static char *makeAfterSubstring(const char *copyOfInput, char *substring, char *afterSubstring);
+static int *doesNotContainSubstring(const char *inputString, const char *substring);
+static char *doReplace(char *inputString, char *substring, char *replaceWithString, char *result);
 
 char *replaceSubstring(char *inputString, char *substring, char *replaceWithString)
 {
-  char copyOfInput[200] = {'\0'};
-  strcpy(copyOfInput, inputString);
+  char *result = calloc(1000, sizeof(char));
 
-  char beforeSubstring[200] = {'\0'};
-  makeBeforeSubstring(copyOfInput, substring,beforeSubstring);
+  if(doesNotContainSubstring(inputString,substring)){
+    strcat(result, inputString);
+    return result;
+  }
 
-  char afterSubstring[200] = {'\0'};
-  makeAfterSubstring(copyOfInput, substring, afterSubstring);
-
-  return concatenateReplaceSubstring(beforeSubstring, replaceWithString, afterSubstring);
+  return doReplace(inputString, substring, replaceWithString, result);
 }
 
 char *concatenate(char* romanNumeral1, char* romanNumeral2)
@@ -28,6 +28,19 @@ char *concatenate(char* romanNumeral1, char* romanNumeral2)
   strcat(result, romanNumeral2);
 
   return result;
+}
+
+static char *doReplace(char *inputString, char *substring, char *replaceWithString, char *result){
+  char copyOfInput[200] = {'\0'};
+  strcpy(copyOfInput, inputString);
+
+  char beforeSubstring[200] = {'\0'};
+  makeBeforeSubstring(copyOfInput, substring,beforeSubstring);
+
+  char afterSubstring[200] = {'\0'};
+  makeAfterSubstring(copyOfInput, substring, afterSubstring);
+
+  return concatenateReplaceSubstring(beforeSubstring, replaceWithString, afterSubstring, result);
 }
 
 static char *makeAfterSubstring(const char *copyOfInput, char *substring, char *afterSubstring){
@@ -46,10 +59,13 @@ static char *makeBeforeSubstring(const char *copyOfInput, char *substring, char 
   return beforeSubstring;
 }
 
-static char *concatenateReplaceSubstring(char *beforeSubstring, char *replaceWithString, char *afterSubstring){
-  char *result = calloc(1000, sizeof(char));
+static char *concatenateReplaceSubstring(char *beforeSubstring, char *replaceWithString, char *afterSubstring, char *result){
   strcat(result, beforeSubstring);
   strcat(result, replaceWithString);
   strcat(result, afterSubstring);
   return result;
+}
+
+static int *doesNotContainSubstring(const char *inputString, const char *substring){
+  return strstr(inputString, substring) == NULL;
 }
