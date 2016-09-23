@@ -3,22 +3,38 @@
 
 START_TEST(testReplaceSubstring)
 {
-  ck_assert_str_eq(replaceSubstring("Hello World", "World", "Michigan"),"Hello Michigan");
-  ck_assert_str_eq(replaceSubstring("Hello World. Hello Universe", "World", "Michigan"),"Hello Michigan. Hello Universe");
-  ck_assert_str_eq(replaceSubstring("CXLIIII", "XL", "XXXX"),"CXXXXIIII");
-  ck_assert_str_eq(replaceSubstring("A", "A", "ABC"),"ABC");
+  char result[1000] = {'\0'};
+
+  replaceSubstring("Hello World", "World", "Michigan", result);
+  ck_assert_str_eq(result, "Hello Michigan");
+
+  memset(result, 0, sizeof result);
+  replaceSubstring("Hello World. Hello Universe", "World", "Michigan", result);
+  ck_assert_str_eq(result, "Hello Michigan. Hello Universe");
+
+  memset(result, 0, sizeof result);
+  replaceSubstring("CXLIIII", "XL", "XXXX", result);
+  ck_assert_str_eq(result, "CXXXXIIII");
+
+  memset(result, 0, sizeof result);
+  replaceSubstring("A", "A", "ABC", result);
+  ck_assert_str_eq(result, "ABC");
 }
 END_TEST
 
 START_TEST(testReplaceEntireString)
 {
-  ck_assert_str_eq(replaceSubstring("Hello", "Hello", "World"),"World");
+  char result[100] = {'\0'};
+  replaceSubstring("Hello", "Hello", "World", result);
+  ck_assert_str_eq(result, "World");
 }
 END_TEST
 
 START_TEST(testReplaceStringThatDoesNotExistReturnsInput)
 {
-  ck_assert_str_eq(replaceSubstring("substring is not here", "foo", "bar"),"substring is not here");
+  char result[100] = {'\0'};
+  replaceSubstring("substring is not here", "foo", "bar", result);
+  ck_assert_str_eq(result, "substring is not here");
 }
 END_TEST
 

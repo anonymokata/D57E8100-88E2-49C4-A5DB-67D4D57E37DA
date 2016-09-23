@@ -2,22 +2,19 @@
 #include <stdlib.h>
 #include <string.h>
 
-static char *concatenateReplaceSubstring(char *beforeSubstring, char *replaceWithString, char *afterSubstring, char *result);
-static char *makeBeforeSubstring(const char *copyOfInput, char *substring, char *beforeSubstring);
-static char *makeAfterSubstring(const char *copyOfInput, char *substring, char *afterSubstring);
-static int *doesNotContainSubstring(const char *inputString, const char *substring);
-static char *doReplace(char *inputString, char *substring, char *replaceWithString, char *result);
+static char *concatenateReplaceSubstring(char *beforeSubstring, char *replaceWithString, char *afterSubstring, char result[]);
+static char *makeBeforeSubstring(const char *copyOfInput, char *subString, char *beforeSubstring);
+static char *makeAfterSubstring(const char *copyOfInput, char *subString, char *afterSubstring);
+static int *doesNotContainSubstring(const char *inputString, const char *subString);
+static void doReplace(char *inputString, char *subString, char *replaceWithString, char result[]);
 
-char *replaceSubstring(char *inputString, char *substring, char *replaceWithString)
+void replaceSubstring(char *inputString, char *subString, char *replaceWithString, char result[])
 {
-  char *result = calloc(1000, sizeof(char));
-
-  if(doesNotContainSubstring(inputString,substring)){
+  if(doesNotContainSubstring(inputString,subString)){
     strcat(result, inputString);
-    return result;
+  }else{
+    doReplace(inputString, subString, replaceWithString, result);
   }
-
-  return doReplace(inputString, substring, replaceWithString, result);
 }
 
 char *concatenate(char* romanNumeral1, char* romanNumeral2)
@@ -30,42 +27,42 @@ char *concatenate(char* romanNumeral1, char* romanNumeral2)
   return result;
 }
 
-static char *doReplace(char *inputString, char *substring, char *replaceWithString, char *result){
+static void doReplace(char *inputString, char *subString, char *replaceWithString, char result[]){
   char copyOfInput[200] = {'\0'};
   strcpy(copyOfInput, inputString);
 
   char beforeSubstring[200] = {'\0'};
-  makeBeforeSubstring(copyOfInput, substring,beforeSubstring);
+  makeBeforeSubstring(copyOfInput, subString,beforeSubstring);
 
   char afterSubstring[200] = {'\0'};
-  makeAfterSubstring(copyOfInput, substring, afterSubstring);
+  makeAfterSubstring(copyOfInput, subString, afterSubstring);
 
-  return concatenateReplaceSubstring(beforeSubstring, replaceWithString, afterSubstring, result);
+  concatenateReplaceSubstring(beforeSubstring, replaceWithString, afterSubstring, result);
 }
 
-static char *makeAfterSubstring(const char *copyOfInput, char *substring, char *afterSubstring){
-  char *startOfSubstring = strstr(copyOfInput, substring);
-  char *endOfSubstring = startOfSubstring + strlen(substring);
+static char *makeAfterSubstring(const char *copyOfInput, char *subString, char *afterSubstring){
+  char *startOfSubstring = strstr(copyOfInput, subString);
+  char *endOfSubstring = startOfSubstring + strlen(subString);
 
   strcpy(afterSubstring, endOfSubstring);
 
   return afterSubstring;
 }
 
-static char *makeBeforeSubstring(const char *copyOfInput, char *substring, char *beforeSubstring){
-  char *startOfSubstring = strstr(copyOfInput, substring);
+static char *makeBeforeSubstring(const char *copyOfInput, char *subString, char *beforeSubstring){
+  char *startOfSubstring = strstr(copyOfInput, subString);
   strncpy(beforeSubstring, copyOfInput, startOfSubstring - copyOfInput);
 
   return beforeSubstring;
 }
 
-static char *concatenateReplaceSubstring(char *beforeSubstring, char *replaceWithString, char *afterSubstring, char *result){
+static char *concatenateReplaceSubstring(char *beforeSubstring, char *replaceWithString, char *afterSubstring, char result[]){
   strcat(result, beforeSubstring);
   strcat(result, replaceWithString);
   strcat(result, afterSubstring);
   return result;
 }
 
-static int *doesNotContainSubstring(const char *inputString, const char *substring){
-  return strstr(inputString, substring) == NULL;
+static int *doesNotContainSubstring(const char *inputString, const char *subString){
+  return strstr(inputString, subString) == NULL;
 }
