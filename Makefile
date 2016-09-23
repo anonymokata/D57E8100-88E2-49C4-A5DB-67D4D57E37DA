@@ -1,7 +1,7 @@
 DEMO = demo
 TEST-SUITE = test-suite
 CC=gcc
-CFLAGS= -Wall
+CFLAGS= -Wall -std=c99
 ODIR= obj
 SDIR= src/main
 TDIR= src/tests
