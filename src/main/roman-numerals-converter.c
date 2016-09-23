@@ -22,7 +22,6 @@ char *convertSubtractiveToAdditivePrefix(char *romanNumerals){
 
       replaceSubstring(copyOfInput, subtractivePrefix[i], additivePrefix[i], tempResult);
 
-      memset(copyOfInput, 0, sizeof copyOfInput);
       strcpy(copyOfInput, tempResult);
   }
 
@@ -42,7 +41,6 @@ char *convertAdditiveToSubtractivePrefix(char *romanNumerals){
   for (i = ADDITIVE_PREFIX_ARRAY_SIZE - 1; i >= 0; i--) {
       memset(tempResult, 0, sizeof tempResult);
       replaceSubstring(copyOfInput, additivePrefix[i], subtractivePrefix[i],tempResult);
-      memset(copyOfInput, 0, sizeof copyOfInput);
       strcpy(copyOfInput, tempResult);
   }
 
@@ -62,7 +60,6 @@ char *convertInternalSums(char *romanNumerals){
   for (i = 0; i < INTERNAL_SUM_ARRAY_SIZE; i++) {
       memset(tempResult, 0, sizeof tempResult);
       replaceSubstring(copyOfInput, internalSumPrefix[i], internalSumValue[i],tempResult);
-      memset(copyOfInput, 0, sizeof copyOfInput);
       strcpy(copyOfInput, tempResult);
   }
 

@@ -5,8 +5,6 @@
 #include "roman-numerals-converter.h"
 #include "common-utils.h"
 
-static void cleanUp(char **pointers, ...);
-
 char *add(char *romanNumeral1, char *romanNumeral2)
 {
     char *additiveNumerals1 = convertSubtractiveToAdditivePrefix(romanNumeral1);
@@ -18,8 +16,4 @@ char *add(char *romanNumeral1, char *romanNumeral2)
     char *subtractivePrefixNumerals = convertAdditiveToSubtractivePrefix(internalSumsNumerals);
 
     return subtractivePrefixNumerals;
-}
-
-void cleanUp(char **pointers, ...){
-  free(*pointers);
 }
