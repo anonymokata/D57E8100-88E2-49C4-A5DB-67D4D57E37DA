@@ -3,8 +3,8 @@
 #include <string.h>
 
 static char *concatenateReplaceSubstring(char *beforeSubstring, char *replaceWithString, char *afterSubstring, char result[]);
-static char *makeBeforeSubstring(const char *copyOfInput, char *subString, char *beforeSubstring);
-static char *makeAfterSubstring(const char *copyOfInput, char *subString, char *afterSubstring);
+static char *makeBeforeSubstring(const char *inputStringCopy, char *subString, char *beforeSubstring);
+static char *makeAfterSubstring(const char *inputStringCopy, char *subString, char *afterSubstring);
 static int *doesNotContainSubstring(const char *inputString, const char *subString);
 static void doReplace(char *inputString, char *subString, char *replaceWithString, char result[]);
 
@@ -28,20 +28,20 @@ char *concatenate(char* romanNumeral1, char* romanNumeral2)
 }
 
 static void doReplace(char *inputString, char *subString, char *replaceWithString, char result[]){
-  char copyOfInput[200] = {'\0'};
-  strcpy(copyOfInput, inputString);
+  char inputStringCopy[200] = {'\0'};
+  strcpy(inputStringCopy, inputString);
 
   char beforeSubstring[200] = {'\0'};
-  makeBeforeSubstring(copyOfInput, subString,beforeSubstring);
+  makeBeforeSubstring(inputStringCopy, subString,beforeSubstring);
 
   char afterSubstring[200] = {'\0'};
-  makeAfterSubstring(copyOfInput, subString, afterSubstring);
+  makeAfterSubstring(inputStringCopy, subString, afterSubstring);
 
   concatenateReplaceSubstring(beforeSubstring, replaceWithString, afterSubstring, result);
 }
 
-static char *makeAfterSubstring(const char *copyOfInput, char *subString, char *afterSubstring){
-  char *startOfSubstring = strstr(copyOfInput, subString);
+static char *makeAfterSubstring(const char *inputStringCopy, char *subString, char *afterSubstring){
+  char *startOfSubstring = strstr(inputStringCopy, subString);
   char *endOfSubstring = startOfSubstring + strlen(subString);
 
   strcpy(afterSubstring, endOfSubstring);
@@ -49,9 +49,9 @@ static char *makeAfterSubstring(const char *copyOfInput, char *subString, char *
   return afterSubstring;
 }
 
-static char *makeBeforeSubstring(const char *copyOfInput, char *subString, char *beforeSubstring){
-  char *startOfSubstring = strstr(copyOfInput, subString);
-  strncpy(beforeSubstring, copyOfInput, startOfSubstring - copyOfInput);
+static char *makeBeforeSubstring(const char *inputStringCopy, char *subString, char *beforeSubstring){
+  char *startOfSubstring = strstr(inputStringCopy, subString);
+  strncpy(beforeSubstring, inputStringCopy, startOfSubstring - inputStringCopy);
 
   return beforeSubstring;
 }
