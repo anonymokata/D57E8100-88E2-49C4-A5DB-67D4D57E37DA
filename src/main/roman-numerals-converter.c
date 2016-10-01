@@ -11,8 +11,7 @@ static char *additivePrefixes[6] = {"IIII","VIIII","XXXX","LXXXX","CCCC","DCCCC"
 static char *internalSumPrefix[6] = {"IIIII","VV","XXXXX","LL","CCCCC","DD"};
 static char *internalSumValue[6] = {"V","X","L","C","D","M"};
 
-char *convertSubtractiveToAdditivePrefix(char *romanNumerals){
-  char *result = calloc(100, sizeof(char));
+char *convertSubtractiveToAdditivePrefix(char *romanNumerals, char result[]){
   char partialResult[100] = {'\0'};
   char romanNumeralsCopy[100] = {'\0'};
   strcpy(romanNumeralsCopy, romanNumerals);
@@ -27,8 +26,7 @@ char *convertSubtractiveToAdditivePrefix(char *romanNumerals){
   return result;
 }
 
-char *convertAdditiveToSubtractivePrefix(char *romanNumerals){
-  char *result = calloc(100, sizeof(char));
+char *convertAdditiveToSubtractivePrefix(char *romanNumerals, char result[]){
   char partialResult[100] = {'\0'};
   char romanNumeralsCopy[100] = {'\0'};
   strcpy(romanNumeralsCopy, romanNumerals);
@@ -44,8 +42,7 @@ char *convertAdditiveToSubtractivePrefix(char *romanNumerals){
   return result;
 }
 
-char *convertInternalSums(char *romanNumerals){
-  char *result = calloc(100, sizeof(char));
+char *convertInternalSums(char *romanNumerals, char result[]){
   char partialResult[100] = {'\0'};
   char romanNumeralsCopy[100] = {'\0'};
   strcpy(romanNumeralsCopy, romanNumerals);

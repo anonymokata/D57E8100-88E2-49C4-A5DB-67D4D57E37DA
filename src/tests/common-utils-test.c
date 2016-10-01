@@ -1,40 +1,26 @@
 #include <check.h>
 #include "../main/common-utils.h"
 
+static void assertReplaceSubstring(char *inputString, char *subString, char *replaceWithString, char *expected);
+
 START_TEST(testReplaceSubstring)
 {
-  char result[1000] = {'\0'};
-
-  replaceSubstring("Hello World", "World", "Michigan", result);
-  ck_assert_str_eq(result, "Hello Michigan");
-
-  memset(result, 0, sizeof result);
-  replaceSubstring("Hello World. Hello Universe", "World", "Michigan", result);
-  ck_assert_str_eq(result, "Hello Michigan. Hello Universe");
-
-  memset(result, 0, sizeof result);
-  replaceSubstring("CXLIIII", "XL", "XXXX", result);
-  ck_assert_str_eq(result, "CXXXXIIII");
-
-  memset(result, 0, sizeof result);
-  replaceSubstring("A", "A", "ABC", result);
-  ck_assert_str_eq(result, "ABC");
+  assertReplaceSubstring("Hello World", "World", "Michigan", "Hello Michigan");
+  assertReplaceSubstring("Hello World. Hello Universe", "World", "Michigan", "Hello Michigan. Hello Universe");
+  assertReplaceSubstring("CXLIIII", "XL", "XXXX", "CXXXXIIII");
+  assertReplaceSubstring("A", "A", "ABC", "ABC");
 }
 END_TEST
 
 START_TEST(testReplaceEntireString)
 {
-  char result[100] = {'\0'};
-  replaceSubstring("Hello", "Hello", "World", result);
-  ck_assert_str_eq(result, "World");
+  assertReplaceSubstring("Hello", "Hello", "World", "World");
 }
 END_TEST
 
 START_TEST(testReplaceStringThatDoesNotExistReturnsInput)
 {
-  char result[100] = {'\0'};
-  replaceSubstring("substring is not here", "foo", "bar", result);
-  ck_assert_str_eq(result, "substring is not here");
+  assertReplaceSubstring("substring is not here", "foo", "bar", "substring is not here");
 }
 END_TEST
 
@@ -45,6 +31,13 @@ START_TEST(testConcatenateString)
   ck_assert_str_eq(concatenate("loooooooooooong ", "short"), "loooooooooooong short");
 }
 END_TEST
+
+static void assertReplaceSubstring(char *inputString, char *subString, char *replaceWithString, char *expected){
+  char result[1000] = {'\0'};
+  replaceSubstring(inputString, subString, replaceWithString,result);
+  ck_assert_str_eq(result, expected);
+}
+
 
 Suite * makeCommonUtilsSuite(void)
 {
