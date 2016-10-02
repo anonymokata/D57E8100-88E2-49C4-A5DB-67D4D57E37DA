@@ -64,6 +64,9 @@ $(ODIR)/common-utils-test.o: $(TDIR)/common-utils-test.c $(SDIR)/common-utils.h
 	$(CC) $(CFLAGS) -c $(TDIR)/common-utils-test.c
 	mv *.o $(ODIR)
 
+valgrind:
+	valgrind --leak-check=yes bin/test-suite
+
 clean:
 	find . -type f -name '*.o' -delete
 	find . -type f -name '*.a' -delete

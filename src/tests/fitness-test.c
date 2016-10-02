@@ -5,36 +5,47 @@
 #include "../main/calculator.h"
 
 static const char *getfield(char* line, int num);
+static void assertAdd(char *firstNumeral, char *secondNumeral, char *expected);
+static FILE *openFileStream();
 
 START_TEST(testAddData)
 {
-  FILE* stream = fopen("src/tests/fitness-test-data", "r");
+  char line[100] = {'\0'};
+  char firstNumeral[100] = {'\0'};
+  char secondNumeral[100] = {'\0'};
+  char expectedNumeral[100] = {'\0'};
 
-  char line[1024];
+  FILE *stream = openFileStream();
+
   while (fgets(line, 1024, stream))
   {
-
-      char *firstNumeral = calloc(100, sizeof(char));
-      char *secondNumeral = calloc(100, sizeof(char));
-      char *expectedNumeral = calloc(100, sizeof(char));
-      char *actualNumeral = calloc(100, sizeof(char));
+      firstNumeral[0] = '\0';
+      secondNumeral[0] = '\0';
+      expectedNumeral[0] = '\0';
       strcat(firstNumeral, getfield(strdup(line), 1));
       strcat(secondNumeral, getfield(strdup(line), 2));
       strcat(expectedNumeral, getfield(strdup(line), 3));
 
-      strcat(actualNumeral, add(firstNumeral, secondNumeral));
-      strcat(actualNumeral, "\n");
-
-      ck_assert_str_eq(actualNumeral, expectedNumeral);
-      free(firstNumeral);
-      free(secondNumeral);
-      free(actualNumeral);
-      free(expectedNumeral);
+      assertAdd(firstNumeral, secondNumeral, expectedNumeral);
   }
+   fclose(stream);
 }
 END_TEST
 
-const char *getfield(char* line, int num)
+static void assertAdd(char *firstNumeral, char *secondNumeral, char *expectedNumeral){
+  char result[100] = {'\0'};
+
+  add(firstNumeral, secondNumeral, result);
+  strcat(result, "\n");
+
+  ck_assert_str_eq(result, expectedNumeral);
+}
+
+static FILE *openFileStream(){
+  return fopen("src/tests/fitness-test-data", "r");
+}
+
+static const char *getfield(char* line, int num)
 {
     const char* tok;
     for (tok = strtok(line, ",");

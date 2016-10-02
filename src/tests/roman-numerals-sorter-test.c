@@ -1,21 +1,29 @@
 #include <check.h>
 #include "../main/roman-numerals-sorter.h"
 
+static void assertSortNumerals(char *input, char *expected);
+
 START_TEST(testSortRomanNumerals)
 {
-  ck_assert_str_eq(sortRomanNumerals("VI"),"VI");
-  ck_assert_str_eq(sortRomanNumerals("IV"),"VI");
-  ck_assert_str_eq(sortRomanNumerals("XICL"),"CLXI");
-  ck_assert_str_eq(sortRomanNumerals("XIICLI"),"CLXIII");
-  ck_assert_str_eq(sortRomanNumerals("IIVII"),"VIIII");
+  assertSortNumerals("VI","VI");
+  assertSortNumerals("IV","VI");
+  assertSortNumerals("XICL","CLXI");
+  assertSortNumerals("XIICLI","CLXIII");
+  assertSortNumerals("IIVII","VIIII");
 }
 END_TEST
 
 START_TEST(testSortLongestRomanNumerals)
 {
-  ck_assert_str_eq(sortRomanNumerals("MXIDXVIMCXMILCC"),"MMMDCCCLXXXVIII");
+  assertSortNumerals("MXIDXVIMCXMILCC","MMMDCCCLXXXVIII");
 }
 END_TEST
+
+static void assertSortNumerals(char *input, char *expected){
+  char result[100] = {'\0'};
+  sortRomanNumerals(input, result);
+  ck_assert_str_eq(result, expected);
+}
 
 Suite * makeRomanNumeralsSorterSuite(void)
 {

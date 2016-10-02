@@ -3,7 +3,9 @@
 
 int main(int argc, char *argv[])
 {
-    printf("add(I,I) = %s\n", add("I","I"));
+    char result[100] = {'\0'};
+    add("I","I", result);
+    printf("add(I,I) = %s\n", result);
 
     return 0;
 }

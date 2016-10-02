@@ -17,10 +17,8 @@ void replaceSubstring(char *inputString, char *subString, char *replaceWithStrin
   }
 }
 
-char *concatenate(char* romanNumeral1, char* romanNumeral2)
+char *concatenate(char* romanNumeral1, char* romanNumeral2, char result[])
 {
-  char *result = calloc(1000, sizeof(char));
-
   strcat(result, romanNumeral1);
   strcat(result, romanNumeral2);
 
@@ -28,13 +26,13 @@ char *concatenate(char* romanNumeral1, char* romanNumeral2)
 }
 
 static void doReplace(char *inputString, char *subString, char *replaceWithString, char result[]){
-  char inputStringCopy[200] = {'\0'};
+  char inputStringCopy[100] = {'\0'};
   strcpy(inputStringCopy, inputString);
 
-  char beforeSubstring[200] = {'\0'};
-  makeBeforeSubstring(inputStringCopy, subString,beforeSubstring);
+  char beforeSubstring[100] = {'\0'};
+  makeBeforeSubstring(inputStringCopy, subString, beforeSubstring);
 
-  char afterSubstring[200] = {'\0'};
+  char afterSubstring[100] = {'\0'};
   makeAfterSubstring(inputStringCopy, subString, afterSubstring);
 
   concatenateReplaceSubstring(beforeSubstring, replaceWithString, afterSubstring, result);

@@ -1,48 +1,56 @@
 #include <check.h>
 #include "../main/calculator.h"
 
+static void assertAdd(char *firstNumeral, char *secondNumeral, char *result);
+
 START_TEST(testAddByConcatinating)
 {
-  ck_assert_str_eq(add("I","I"),"II");
-  ck_assert_str_eq(add("I","II"),"III");
+  assertAdd("I","I","II");
+  assertAdd("I","II","III");
 }
 END_TEST
 
 START_TEST(testAddSortByLargestToSmallest)
 {
-  ck_assert_str_eq(add("I","V"),"VI");
-  ck_assert_str_eq(add("XI","CL"),"CLXI");
-  ck_assert_str_eq(add("XII","CLI"),"CLXIII");
+  assertAdd("I","V","VI");
+  assertAdd("XI","CL","CLXI");
+  assertAdd("XII","CLI","CLXIII");
 }
 END_TEST
 
 START_TEST(testAddConvertToSubtractivePrefix)
 {
-  ck_assert_str_eq(add("IX","I"),"X");
-  ck_assert_str_eq(add("IX","IX"),"XVIII");
-  ck_assert_str_eq(add("IX","III"),"XII");
-  ck_assert_str_eq(add("I","IX"),"X");
-  ck_assert_str_eq(add("III","IX"),"XII");
+  assertAdd("IX","I","X");
+  assertAdd("IX","IX","XVIII");
+  assertAdd("IX","III","XII");
+  assertAdd("I","IX","X");
+  assertAdd("III","IX","XII");
 }
 END_TEST
 
 START_TEST(testAddConvertBackToSubtractive)
 {
-  ck_assert_str_eq(add("CXXIII","LXIX"),"CXCII");
+  assertAdd("CXXIII","LXIX","CXCII");
 }
 END_TEST
 
 START_TEST(testAddOneToMakeLongestRomanNumeral)
 {
-  ck_assert_str_eq(add("MMMDCCCLXXXVII","I"),"MMMDCCCLXXXVIII");
+  assertAdd("MMMDCCCLXXXVII","I","MMMDCCCLXXXVIII");
 }
 END_TEST
 
 START_TEST(testAddOneToMakeLargesttRomanNumeral)
 {
-  ck_assert_str_eq(add("MMMCMXCVIII","I"),"MMMCMXCIX");
+  assertAdd("MMMCMXCVIII","I","MMMCMXCIX");
 }
 END_TEST
+
+static void assertAdd(char *firstNumeral, char *secondNumeral, char *expected){
+  char result[100] = {'\0'};
+  add(firstNumeral, secondNumeral, result);
+  ck_assert_str_eq(result, expected);
+}
 
 Suite * makeCalculatorSuite(void)
 {

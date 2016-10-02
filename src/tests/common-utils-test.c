@@ -2,6 +2,7 @@
 #include "../main/common-utils.h"
 
 static void assertReplaceSubstring(char *inputString, char *subString, char *replaceWithString, char *expected);
+static void assertConcatenate(char *input1, char *input2, char *expected);
 
 START_TEST(testReplaceSubstring)
 {
@@ -26,15 +27,21 @@ END_TEST
 
 START_TEST(testConcatenateString)
 {
-  ck_assert_str_eq(concatenate("foo", "bar"), "foobar");
-  ck_assert_str_eq(concatenate("short", " loooooooooooong"), "short loooooooooooong");
-  ck_assert_str_eq(concatenate("loooooooooooong ", "short"), "loooooooooooong short");
+  assertConcatenate("foo", "bar", "foobar");
+  assertConcatenate("short", " loooooooooooong", "short loooooooooooong");
+  assertConcatenate("loooooooooooong ", "short", "loooooooooooong short");
 }
 END_TEST
 
 static void assertReplaceSubstring(char *inputString, char *subString, char *replaceWithString, char *expected){
-  char result[1000] = {'\0'};
-  replaceSubstring(inputString, subString, replaceWithString,result);
+  char result[100] = {'\0'};
+  replaceSubstring(inputString, subString, replaceWithString, result);
+  ck_assert_str_eq(result, expected);
+}
+
+static void assertConcatenate(char *input1, char *input2, char *expected){
+  char result[100] = {'\0'};
+  concatenate(input1, input2 ,result);
   ck_assert_str_eq(result, expected);
 }
 
