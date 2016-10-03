@@ -5,7 +5,7 @@
 static void concatenateReplaceSubstring(char *beforeSubstring, char *replaceWithString, char *afterSubstring, char result[]);
 static char *makeBeforeSubstring(const char *inputStringCopy, char *subString, char *beforeSubstring);
 static char *makeAfterSubstring(const char *inputStringCopy, char *subString, char *afterSubstring);
-static int *doesNotContainSubstring(const char *inputString, const char *subString);
+static int doesNotContainSubstring(const char *inputString, const char *subString);
 static void doReplace(char *inputString, char *subString, char *replaceWithString, char result[]);
 
 void replaceSubstring(char *inputString, char *subString, char *replaceWithString, char result[])
@@ -58,6 +58,6 @@ static void concatenateReplaceSubstring(char *beforeSubstring, char *replaceWith
   strcat(result, afterSubstring);
 }
 
-static int *doesNotContainSubstring(const char *inputString, const char *subString){
-  return strstr(inputString, subString) == NULL;
+static int doesNotContainSubstring(const char *inputString, const char *subString){
+  return strstr(inputString, subString) == NULL? 1 : 0;
 }

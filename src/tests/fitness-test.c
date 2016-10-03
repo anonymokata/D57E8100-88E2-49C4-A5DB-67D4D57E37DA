@@ -8,9 +8,10 @@ static const char *getfield(char* line, int num);
 static void assertAdd(char *firstNumeral, char *secondNumeral, char *expected);
 static FILE *openFileStream();
 
-START_TEST(testAddData)
+START_TEST(testAddFitness)
 {
   char line[100] = {'\0'};
+  char lineCopy[100] = {'\0'};
   char firstNumeral[100] = {'\0'};
   char secondNumeral[100] = {'\0'};
   char expectedNumeral[100] = {'\0'};
@@ -22,9 +23,16 @@ START_TEST(testAddData)
       firstNumeral[0] = '\0';
       secondNumeral[0] = '\0';
       expectedNumeral[0] = '\0';
-      strcat(firstNumeral, getfield(strdup(line), 1));
-      strcat(secondNumeral, getfield(strdup(line), 2));
-      strcat(expectedNumeral, getfield(strdup(line), 3));
+      lineCopy[0] = '\0';
+      
+      strcat(lineCopy,line);
+      strcat(firstNumeral, getfield(lineCopy, 1));
+
+      strcat(lineCopy,line);
+      strcat(secondNumeral, getfield(lineCopy, 2));
+
+      strcat(lineCopy,line);
+      strcat(expectedNumeral, getfield(lineCopy, 3));
 
       assertAdd(firstNumeral, secondNumeral, expectedNumeral);
   }
@@ -66,7 +74,7 @@ Suite * makeFitnessSuite(void)
     s = suite_create("Fitness Suite");
     tcCore = tcase_create("Core");
 
-    tcase_add_test(tcCore, testAddData);
+    tcase_add_test(tcCore, testAddFitness);
     suite_add_tcase(s, tcCore);
 
     return s;
