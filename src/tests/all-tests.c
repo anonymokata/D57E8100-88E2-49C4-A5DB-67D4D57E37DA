@@ -1,6 +1,7 @@
 #include <check.h>
 #include "calculator-test.h"
 #include "roman-numerals-sorter-test.h"
+#include "roman-numerals-reducer-test.h"
 #include "roman-numerals-converter-test.h"
 #include "common-utils-test.h"
 #include "fitness-test.h"
@@ -16,6 +17,7 @@ int main(void)
   srunner_add_suite (sr, makeCalculatorSuite());
   srunner_add_suite (sr, makeRomanNumeralsSorterSuite());
   srunner_add_suite (sr, makeRomanNumeralsConverterSuite());
+  srunner_add_suite (sr, makeRomanNumeralsReducerSuite());
   srunner_add_suite (sr, makeCommonUtilsSuite());
   srunner_add_suite (sr, makeFitnessSuite());
 

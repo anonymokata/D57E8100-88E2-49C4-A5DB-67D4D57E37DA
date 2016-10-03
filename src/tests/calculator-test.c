@@ -40,7 +40,7 @@ START_TEST(testAddOneToMakeLongestRomanNumeral)
 }
 END_TEST
 
-START_TEST(testAddOneToMakeLargesttRomanNumeral)
+START_TEST(testAddOneToMakeLargestRomanNumeral)
 {
   assertAdd("MMMCMXCVIII","I","MMMCMXCIX");
 }
@@ -65,7 +65,7 @@ Suite * makeCalculatorSuite(void)
     tcase_add_test(tcCore, testAddConvertToSubtractivePrefix);
     tcase_add_test(tcCore, testAddConvertBackToSubtractive);
     tcase_add_test(tcCore, testAddOneToMakeLongestRomanNumeral);
-    tcase_add_test(tcCore, testAddOneToMakeLargesttRomanNumeral);
+    tcase_add_test(tcCore, testAddOneToMakeLargestRomanNumeral);
     suite_add_tcase(s, tcCore);
 
     return s;

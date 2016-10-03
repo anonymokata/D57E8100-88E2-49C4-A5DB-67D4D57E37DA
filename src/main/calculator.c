@@ -12,7 +12,6 @@ char *add(char *romanNumeral1, char *romanNumeral2, char result[])
     char combinedNumerals[100] = {'\0'};
     char sortnedNumerals[100] = {'\0'};
     char internalSumsNumerals[100] = {'\0'};
-    char subtractivePrefixNumerals[100] = {'\0'};
 
     convertSubtractiveToAdditivePrefix(romanNumeral1, additiveNumerals1);
     convertSubtractiveToAdditivePrefix(romanNumeral2, additiveNumerals2);
