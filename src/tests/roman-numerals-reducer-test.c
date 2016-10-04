@@ -3,11 +3,43 @@
 
 static void assertReduceNumerals(char *input, char *reduceBy, char *expected);
 
-START_TEST(testReduce)
+START_TEST(testReduceSingleValue)
 {
-  assertReduceNumerals("","","");
+  assertReduceNumerals("II","I","I");
+  assertReduceNumerals("VII","V","II");
 }
 END_TEST
+
+START_TEST(testReduceMultipleValues)
+{
+  assertReduceNumerals("III","II","I");
+  assertReduceNumerals("CVII","VI","CI");
+}
+END_TEST
+
+// START_TEST(testExpandRightSideWhenCannotReduceRemainder)
+// {
+//   assertReduceNumerals("X","V","V");// VV-V -> V
+//   assertReduceNumerals("XX","XII","VIII");//X-II -> VV -> VIIIII-II -> VIII
+//   assertReduceNumerals("L","II","XXXXVIII");//XXXXX -> XXXXVV -> XXXXVIIIII
+// }
+// END_TEST
+//
+// START_TEST(testDoNotExpandSecondTimeIfNoRemaineder)
+// {
+//   assertReduceNumerals("L","X","XXXX");//XXXXX -> XXXX Not XXXVV
+// }
+// END_TEST
+//
+//
+// START_TEST(testMultiplePasses)
+// {
+//   assertReduceNumerals("XX","XVII","III");// X-VII -> VV -> V-II -> IIIII -> IIIII-II -> III
+//   assertReduceNumerals("C","LXV","XXXV");//C -> LL-LXV -> L-XV -> XXXX-V -> XXXV
+//   assertReduceNumerals("C","LV","XXXXV");//C -> LL-LV -> L-V -> XXXXX-V -> XXXXVV-V -> XXXXV
+// }
+// END_TEST
+
 
 static void assertReduceNumerals(char *input, char *reduceBy, char *expected){
   char result[100] = {'\0'};
@@ -23,7 +55,9 @@ Suite * makeRomanNumeralsReducerSuite(void)
     s = suite_create("Roman Numerals Reducer Suite");
     tcCore = tcase_create("Core");
 
-    tcase_add_test(tcCore, testReduce);
+    tcase_add_test(tcCore, testReduceSingleValue);
+    tcase_add_test(tcCore, testReduceMultipleValues);
+    // tcase_add_test(tcCore, testExpandRightSideWhenCannotReduceRemainder);
     suite_add_tcase(s, tcCore);
 
     return s;
