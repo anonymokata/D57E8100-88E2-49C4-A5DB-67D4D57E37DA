@@ -5,35 +5,35 @@ static void assertExpandNumerals(char *input, char *expandBy, char *expected);
 
 START_TEST(testExpandSingleNumeral)
 {
-  assertExpandNumerals("V","V","IIIII");
-  assertExpandNumerals("X","X","VV");
-  assertExpandNumerals("L","L","XXXXX");
-  assertExpandNumerals("C","C","LL");
-  assertExpandNumerals("D","D","CCCCC");
-  assertExpandNumerals("M","M","DD");
+  assertExpandNumerals("V",'V',"IIIII");
+  assertExpandNumerals("X",'X',"VV");
+  assertExpandNumerals("L",'L',"XXXXX");
+  assertExpandNumerals("C",'C',"LL");
+  assertExpandNumerals("D",'D',"CCCCC");
+  assertExpandNumerals("M",'M',"DD");
 }
 END_TEST
 
 START_TEST(testExpandRightMostOnly)
 {
-  assertExpandNumerals("LXV","V","LXIIIII");
-  assertExpandNumerals("LX","X","LVV");
-  assertExpandNumerals("ML","L","MXXXXX");
-  assertExpandNumerals("MC","C","MLL");
-  assertExpandNumerals("MD","D","MCCCCC");
-  assertExpandNumerals("MM","M","MDD");
-  assertExpandNumerals("VV","V","VIIIII");
-  assertExpandNumerals("MDCLXV","V","MDCLXIIIII");
+  assertExpandNumerals("LXV",'V',"LXIIIII");
+  assertExpandNumerals("LX",'X',"LVV");
+  assertExpandNumerals("ML",'L',"MXXXXX");
+  assertExpandNumerals("MC",'C',"MLL");
+  assertExpandNumerals("MM",'M',"MDD");
+  assertExpandNumerals("MD",'D',"MCCCCC");
+  assertExpandNumerals("VV",'V',"VIIIII");
+  assertExpandNumerals("MDCLXV",'V',"MDCLXIIIII");
 }
 END_TEST
 
 START_TEST(testExpandFirstNumeralLargerThanExpandBy)
 {
-  assertExpandNumerals("XI","V","VVI");
-  assertExpandNumerals("XXII","V","XVVII");
-  assertExpandNumerals("LX","X","LVV");
-  assertExpandNumerals("LX","I","LVV");
-  assertExpandNumerals("MDLXVI","C","MCCCCCLXVI");
+  assertExpandNumerals("XI",'V',"VVI");
+  assertExpandNumerals("XXII",'V',"XVVII");
+  assertExpandNumerals("LX",'X',"LVV");
+  assertExpandNumerals("LX",'I',"LVV");
+  assertExpandNumerals("MDLXVI",'C',"MCCCCCLXVI");
 }
 END_TEST
 
