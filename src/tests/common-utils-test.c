@@ -41,6 +41,32 @@ START_TEST(testConcatenateString)
 }
 END_TEST
 
+START_TEST(testIsGreaterThanAllNumerals)
+{
+  ck_assert_int_eq(isGreaterThanOrEqual('V','I'), TRUE);
+  ck_assert_int_eq(isGreaterThanOrEqual('X','V'), TRUE);
+  ck_assert_int_eq(isGreaterThanOrEqual('L','X'), TRUE);
+  ck_assert_int_eq(isGreaterThanOrEqual('C','L'), TRUE);
+  ck_assert_int_eq(isGreaterThanOrEqual('D','C'), TRUE);
+  ck_assert_int_eq(isGreaterThanOrEqual('M','D'), TRUE);
+
+  ck_assert_int_eq(isGreaterThanOrEqual('I','V'), FALSE);
+  ck_assert_int_eq(isGreaterThanOrEqual('V','X'), FALSE);
+  ck_assert_int_eq(isGreaterThanOrEqual('X','L'), FALSE);
+  ck_assert_int_eq(isGreaterThanOrEqual('L','C'), FALSE);
+  ck_assert_int_eq(isGreaterThanOrEqual('C','D'), FALSE);
+  ck_assert_int_eq(isGreaterThanOrEqual('D','M'), FALSE);
+}
+END_TEST
+
+START_TEST(testIsGreaterOrEqual)
+{
+  ck_assert_int_eq(isGreaterThanOrEqual('I','I'), TRUE);
+  ck_assert_int_eq(isGreaterThanOrEqual('M','M'), TRUE);
+  ck_assert_int_eq(isGreaterThanOrEqual('M','I'), TRUE);
+}
+END_TEST
+
 static void assertReplaceSubstring(char *inputString, char *subString, char *replaceWithString, char *expected){
   char result[100] = {'\0'};
   replaceSubstring(inputString, subString, replaceWithString, result);
@@ -52,7 +78,6 @@ static void assertConcatenate(char *input1, char *input2, char *expected){
   concatenate(input1, input2 ,result);
   ck_assert_str_eq(result, expected);
 }
-
 
 Suite * makeCommonUtilsSuite(void)
 {
@@ -68,6 +93,8 @@ Suite * makeCommonUtilsSuite(void)
     tcase_add_test(tcCore, testReplaceWithNothingDoesNotAddWhiteSpace);
     tcase_add_test(tcCore, testReplaceStringThatDoesNotExistReturnsInput);
     tcase_add_test(tcCore, testConcatenateString);
+    tcase_add_test(tcCore, testIsGreaterThanAllNumerals);
+    tcase_add_test(tcCore, testIsGreaterOrEqual);
 
     suite_add_tcase(s, tcCore);
 

@@ -26,14 +26,14 @@ void concatenate(char* romanNumeral1, char* romanNumeral2, char result[])
   strcat(result, romanNumeral2);
 }
 
-int isGreaterThan(int romanNumeral, int compareTo){
+int isGreaterThanOrEqual(int romanNumeral, int compareTo){
   int romanNumeralKey = findRomanNumeralKey(romanNumeral);
   int compareToKey = findRomanNumeralKey(compareTo);
 
   int romanNumeralValue = romanNumeralValues[romanNumeralKey];
   int compareToValue = romanNumeralValues[compareToKey];
 
-  return romanNumeralValue > compareToValue;
+  return romanNumeralValue >= compareToValue;
 }
 
 static int findRomanNumeralKey(char numeral){

@@ -25,7 +25,7 @@ void reduceMatchingNumerals(char *romanNumerals, char reduceBy[], char result[])
       index++;
     }
     else{
-      expandNumerals(romanNumeralsCopy, partialResult);
+      expandNumerals(romanNumeralsCopy, &reduceByCharacter ,partialResult);
     }
 
     loop++;

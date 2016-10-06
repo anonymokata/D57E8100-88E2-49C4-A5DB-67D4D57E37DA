@@ -1,21 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "roman-numerals-sorter.h"
+#include "common-utils.h"
 
-static char *expandIndex[6] = {"V","X","L","C","D","M"};
-static char *expandValue[6] = {"IIIII","VV","XXXXX","LL","CCCCC","DD"};
+static char expandIndexes[6] = {'V','X','L','C','D','M'};
+static char *expandValues[6] = {"IIIII","VV","XXXXX","LL","CCCCC","DD"};
+static char *makeExpandedValues(char expandBy);
 
-void expandNumerals(char *romanNumerals, char result[]){
-  char *lastNumeral = &romanNumerals[(strlen(romanNumerals)-1)];
-  char expandedNumerals[5] = {'\0'};
+void expandNumerals(char *romanNumerals, char *expandBy, char result[]){
+  char partialResult[100] = {'\0'};
+  char *expandedValues;
+  char *expandMatch;
+  int size = strlen(romanNumerals)-1;
 
-  for (int i = 0; i < 6; i++) {
-    if(strcmp(expandIndex[i], lastNumeral) == 0){
-      strcpy(expandedNumerals, expandValue[i]);
+  for (int i = size; i >= 0; i--) {
+    if(isGreaterThanOrEqual(romanNumerals[i], expandBy[0])){
+       expandMatch = romanNumerals[i];
+       expandedValues = makeExpandedValues(expandMatch);
+       break;
     }
   }
 
-  strcat(result, romanNumerals);
-  result[strlen(romanNumerals)-1] = '\0';
-  strcat(result, expandedNumerals);
+  replaceSubstring(romanNumerals, &expandMatch, expandedValues, partialResult);
+  sortRomanNumerals(partialResult, result);
+}
+
+static char *makeExpandedValues(char expandBy){
+  int matchIndex = 0;
+  for (int i = 0; i < 6; i++) {
+    if(expandIndexes[i] == expandBy){
+      matchIndex = i;
+    }
+  }
+  return expandValues[matchIndex];
 }

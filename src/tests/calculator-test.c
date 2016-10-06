@@ -2,6 +2,7 @@
 #include "../main/calculator.h"
 
 static void assertAdd(char *firstNumeral, char *secondNumeral, char *result);
+static void assertSubtract(char *firstNumeral, char *secondNumeral, char *expected);
 
 START_TEST(testAddByConcatinating)
 {
@@ -46,9 +47,30 @@ START_TEST(testAddOneToMakeLargestRomanNumeral)
 }
 END_TEST
 
+START_TEST(testSubtractReducesCommonNumerals)
+{
+  assertSubtract("II","I","I");
+  assertSubtract("CLXV","LXV","C");
+}
+END_TEST
+
+START_TEST(testSubtractHandlesSubtractivePrefixes)
+{
+  assertSubtract("IV","II","II");//4-2=2
+  assertSubtract("XLIV","VI","XXXVIII");//44-6=38
+  assertSubtract("C","XLIV","LVI");//100-44=56    XXXXIIII
+}
+END_TEST
+
 static void assertAdd(char *firstNumeral, char *secondNumeral, char *expected){
   char result[100] = {'\0'};
   add(firstNumeral, secondNumeral, result);
+  ck_assert_str_eq(result, expected);
+}
+
+static void assertSubtract(char *firstNumeral, char *secondNumeral, char *expected){
+  char result[100] = {'\0'};
+  subtract(firstNumeral, secondNumeral, result);
   ck_assert_str_eq(result, expected);
 }
 
@@ -66,6 +88,8 @@ Suite * makeCalculatorSuite(void)
     tcase_add_test(tcCore, testAddConvertBackToSubtractive);
     tcase_add_test(tcCore, testAddOneToMakeLongestRomanNumeral);
     tcase_add_test(tcCore, testAddOneToMakeLargestRomanNumeral);
+    tcase_add_test(tcCore, testSubtractReducesCommonNumerals);
+    tcase_add_test(tcCore, testSubtractHandlesSubtractivePrefixes);
     suite_add_tcase(s, tcCore);
 
     return s;

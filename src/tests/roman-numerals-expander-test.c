@@ -1,35 +1,51 @@
 #include <check.h>
 #include "../main/roman-numerals-expander.h"
 
-static void assertExpandNumerals(char *input, char *expected);
+static void assertExpandNumerals(char *input, char *expandBy, char *expected);
 
 START_TEST(testExpandSingleNumeral)
 {
-  assertExpandNumerals("V","IIIII");
-  assertExpandNumerals("X","VV");
-  assertExpandNumerals("L","XXXXX");
-  assertExpandNumerals("C","LL");
-  assertExpandNumerals("D","CCCCC");
-  assertExpandNumerals("M","DD");
+  assertExpandNumerals("V","V","IIIII");
+  assertExpandNumerals("X","X","VV");
+  assertExpandNumerals("L","L","XXXXX");
+  assertExpandNumerals("C","C","LL");
+  assertExpandNumerals("D","D","CCCCC");
+  assertExpandNumerals("M","M","DD");
 }
 END_TEST
 
 START_TEST(testExpandRightMostOnly)
 {
-  assertExpandNumerals("LXV","LXIIIII");
-  assertExpandNumerals("LX","LVV");
-  assertExpandNumerals("ML","MXXXXX");
-  assertExpandNumerals("MC","MLL");
-  assertExpandNumerals("MD","MCCCCC");
-  assertExpandNumerals("MM","MDD");
-  assertExpandNumerals("VV","VIIIII");
-  assertExpandNumerals("MDCLXV","MDCLXIIIII");
+  assertExpandNumerals("LXV","V","LXIIIII");
+  assertExpandNumerals("LX","X","LVV");
+  assertExpandNumerals("ML","L","MXXXXX");
+  assertExpandNumerals("MC","C","MLL");
+  assertExpandNumerals("MD","D","MCCCCC");
+  assertExpandNumerals("MM","M","MDD");
+  assertExpandNumerals("VV","V","VIIIII");
+  assertExpandNumerals("MDCLXV","V","MDCLXIIIII");
 }
 END_TEST
 
-static void assertExpandNumerals(char *input, char *expected){
+START_TEST(testExpandFirstNumeralLargerThanExpandBy)
+{
+  assertExpandNumerals("XI","V","VVI");
+  assertExpandNumerals("XXII","V","XVVII");
+  assertExpandNumerals("LX","X","LVV");
+  assertExpandNumerals("LX","I","LVV");
+  assertExpandNumerals("MDLXVI","C","MCCCCCLXVI");
+}
+END_TEST
+
+// START_TEST(testExpandNoMatch)
+// {
+//   assertExpandNumerals("I","C","EXPAND FAILED");
+// }
+// END_TEST
+
+static void assertExpandNumerals(char *input, char *expandBy, char *expected){
   char result[100] = {'\0'};
-  expandNumerals(input, result);
+  expandNumerals(input, expandBy, result);
   ck_assert_str_eq(result, expected);
 }
 
@@ -43,6 +59,8 @@ Suite * makeRomanNumeralsExpanderSuite(void)
 
     tcase_add_test(tcCore, testExpandSingleNumeral);
     tcase_add_test(tcCore, testExpandRightMostOnly);
+    tcase_add_test(tcCore, testExpandFirstNumeralLargerThanExpandBy);
+    // tcase_add_test(tcCore, testExpandNoMatch);
 
     suite_add_tcase(s, tcCore);
 

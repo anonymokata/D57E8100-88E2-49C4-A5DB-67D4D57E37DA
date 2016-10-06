@@ -3,6 +3,6 @@
 
 void replaceSubstring(char *inputString, char *substring, char *replaceWith, char result[]);
 void concatenate(char *romanNumeral1, char *romanNumeral2, char result[]);
-int isGreaterThan(int romanNumeral, int compareTo);
+int isGreaterThanOrEqual(int romanNumeral, int compareTo);
 
 #endif
