@@ -6,6 +6,7 @@
 
 static int shouldContinue(const char reduceBy, const int loop);
 static void makeResult(const char *partialResult, const int loop, char result[]);
+static void removeCommonNumerals(char *romanNumeralsCopy, char *commonNumeral, char partialResult[]);
 static int containsReduceBy(const char *romanNumerals, const char *reduceBy);
 static int MAX_LOOP = 20;
 
@@ -21,7 +22,7 @@ void reduceMatchingNumerals(char *romanNumerals, char reduceBy[], char result[])
     char *reduceByCharacter = reduceBy[index];
 
     if(containsReduceBy(romanNumeralsCopy, &reduceByCharacter)){
-      replaceSubstring(romanNumeralsCopy,  &reduceByCharacter, "", partialResult);
+      removeCommonNumerals(romanNumeralsCopy,  &reduceByCharacter, partialResult);
       index++;
     }
     else{
@@ -33,6 +34,10 @@ void reduceMatchingNumerals(char *romanNumerals, char reduceBy[], char result[])
   }
 
   makeResult(partialResult, loop, result);
+}
+
+void removeCommonNumerals(char *romanNumeralsCopy, char *commonNumeral, char partialResult[]){
+  replaceSubstring(romanNumeralsCopy,  commonNumeral, "", partialResult);
 }
 
 static int shouldContinue(const char reduceBy, const int loop){
