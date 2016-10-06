@@ -20,15 +20,15 @@ void add(char *romanNumeral1, char *romanNumeral2, char result[])
     sortRomanNumerals(combinedNumerals, sortnedNumerals);
     convertInternalSums(sortnedNumerals, internalSumsNumerals);
     convertAdditiveToSubtractivePrefix(internalSumsNumerals,result);
-
-    return result;
 }
 
 void subtract(char *romanNumeral1, char *romanNumeral2, char result[]){
   char additiveNumerals1[100] = {'\0'};
   char additiveNumerals2[100] = {'\0'};
+  char reducedNumerals[100] = {'\0'};
 
   convertSubtractiveToAdditivePrefix(romanNumeral1, additiveNumerals1);
   convertSubtractiveToAdditivePrefix(romanNumeral2, additiveNumerals2);
-  reduceMatchingNumerals(additiveNumerals1, additiveNumerals2, result);
+  reduceMatchingNumerals(additiveNumerals1, additiveNumerals2, reducedNumerals);
+  convertAdditiveToSubtractivePrefix(reducedNumerals,result);
 }

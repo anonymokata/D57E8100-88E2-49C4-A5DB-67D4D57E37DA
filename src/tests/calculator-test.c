@@ -62,6 +62,13 @@ START_TEST(testSubtractHandlesSubtractivePrefixes)
 }
 END_TEST
 
+START_TEST(testSubtractConvertsBackToSubtractivePrefixes)
+{
+  assertSubtract("X","I","IX");//10-1=9
+  assertSubtract("CLXI","XX","CXLI");//161-1=141
+}
+END_TEST
+
 static void assertAdd(char *firstNumeral, char *secondNumeral, char *expected){
   char result[100] = {'\0'};
   add(firstNumeral, secondNumeral, result);
@@ -90,6 +97,7 @@ Suite * makeCalculatorSuite(void)
     tcase_add_test(tcCore, testAddOneToMakeLargestRomanNumeral);
     tcase_add_test(tcCore, testSubtractReducesCommonNumerals);
     tcase_add_test(tcCore, testSubtractHandlesSubtractivePrefixes);
+    tcase_add_test(tcCore, testSubtractConvertsBackToSubtractivePrefixes);
     suite_add_tcase(s, tcCore);
 
     return s;
