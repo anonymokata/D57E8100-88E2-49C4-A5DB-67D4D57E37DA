@@ -44,7 +44,7 @@ removeDemo:
 	@rm $(ODIR)/demo.o
 
 valgrind:
-	valgrind --leak-check=yes bin/test-suite
+	CK_FORK=no valgrind --leak-check=yes bin/test-suite
 
 clean:
 	find . -type f -name '*.o' -delete
