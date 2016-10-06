@@ -7,6 +7,9 @@ static char *makeBeforeSubstring(const char *inputStringCopy, char *subString, c
 static char *makeAfterSubstring(const char *inputStringCopy, char *subString, char *afterSubstring);
 static int doesNotContainSubstring(const char *inputString, const char *subString);
 static void doReplace(char *inputString, char *subString, char *replaceWithString, char result[]);
+static int findRomanNumeralKey(char numeral);
+static char romanNumeralKeys[7] = {'I','V','X','L','C','D','M'};
+static int romanNumeralValues[7] = {1,5,10,50,100,500,1000};
 
 void replaceSubstring(char *inputString, char *subString, char *replaceWithString, char result[])
 {
@@ -21,6 +24,26 @@ void concatenate(char* romanNumeral1, char* romanNumeral2, char result[])
 {
   strcat(result, romanNumeral1);
   strcat(result, romanNumeral2);
+}
+
+int isGreaterThan(int romanNumeral, int compareTo){
+  int romanNumeralKey = findRomanNumeralKey(romanNumeral);
+  int compareToKey = findRomanNumeralKey(compareTo);
+
+  int romanNumeralValue = romanNumeralValues[romanNumeralKey];
+  int compareToValue = romanNumeralValues[compareToKey];
+
+  return romanNumeralValue > compareToValue;
+}
+
+static int findRomanNumeralKey(char numeral){
+  int key = 0;
+  for (int i = 0; i < 7; i++) {
+    if(romanNumeralKeys[i] == numeral){
+      key = i;
+    }
+  }
+  return key;
 }
 
 static void doReplace(char *inputString, char *subString, char *replaceWithString, char result[]){

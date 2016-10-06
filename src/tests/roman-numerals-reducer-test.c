@@ -17,28 +17,35 @@ START_TEST(testReduceMultipleValues)
 }
 END_TEST
 
-// START_TEST(testExpandRightSideWhenCannotReduceRemainder)
-// {
-//   assertReduceNumerals("X","V","V");// VV-V -> V
-//   assertReduceNumerals("XX","XII","VIII");//X-II -> VV -> VIIIII-II -> VIII
-//   assertReduceNumerals("L","II","XXXXVIII");//XXXXX -> XXXXVV -> XXXXVIIIII
-// }
-// END_TEST
-//
-// START_TEST(testDoNotExpandSecondTimeIfNoRemaineder)
-// {
-//   assertReduceNumerals("L","X","XXXX");//XXXXX -> XXXX Not XXXVV
-// }
-// END_TEST
-//
-//
-// START_TEST(testMultiplePasses)
-// {
-//   assertReduceNumerals("XX","XVII","III");// X-VII -> VV -> V-II -> IIIII -> IIIII-II -> III
-//   assertReduceNumerals("C","LXV","XXXV");//C -> LL-LXV -> L-XV -> XXXX-V -> XXXV
-//   assertReduceNumerals("C","LV","XXXXV");//C -> LL-LV -> L-V -> XXXXX-V -> XXXXVV-V -> XXXXV
-// }
-// END_TEST
+START_TEST(testExpandRightSideWhenCannotReduceRemainder)
+{
+  assertReduceNumerals("X","V","V");// VV-V -> V
+  assertReduceNumerals("XX","XII","VIII");//X-II -> VV -> VIIIII-II -> VIII
+  assertReduceNumerals("L","II","XXXXVIII");//XXXXX -> XXXXVV -> XXXXVIIIII
+}
+END_TEST
+
+START_TEST(testDoNotExpandSecondTimeIfNoRemaineder)
+{
+  assertReduceNumerals("L","X","XXXX");//XXXXX -> XXXX Not XXXVV
+}
+END_TEST
+
+
+START_TEST(testMultiplePasses)
+{
+  assertReduceNumerals("XX","XVII","III");// X-VII -> VV -> V-II -> IIIII -> IIIII-II -> III
+  assertReduceNumerals("C","LXV","XXXV");//C -> LL-LXV -> L-XV -> XXXX-V -> XXXV
+  assertReduceNumerals("C","LV","XXXXV");//C -> LL-LV -> L-V -> XXXXX-V -> XXXXVV-V -> XXXXV
+}
+END_TEST
+
+START_TEST(testStopOn20Loops)
+{
+  assertReduceNumerals("VIIIIIIIIIIIIIIIIIII" ,"IIIIIIIIIIIIIIIIIII","V");
+  assertReduceNumerals("VIIIIIIIIIIIIIIIIIII", "IIIIIIIIIIIIIIIIIIII","REDUCER FAILED");
+}
+END_TEST
 
 
 static void assertReduceNumerals(char *input, char *reduceBy, char *expected){
@@ -57,7 +64,10 @@ Suite * makeRomanNumeralsReducerSuite(void)
 
     tcase_add_test(tcCore, testReduceSingleValue);
     tcase_add_test(tcCore, testReduceMultipleValues);
-    // tcase_add_test(tcCore, testExpandRightSideWhenCannotReduceRemainder);
+    tcase_add_test(tcCore, testExpandRightSideWhenCannotReduceRemainder);
+    tcase_add_test(tcCore, testDoNotExpandSecondTimeIfNoRemaineder);
+    tcase_add_test(tcCore, testMultiplePasses);
+    tcase_add_test(tcCore, testStopOn20Loops);
     suite_add_tcase(s, tcCore);
 
     return s;

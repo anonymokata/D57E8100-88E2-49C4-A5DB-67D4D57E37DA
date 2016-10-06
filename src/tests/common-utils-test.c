@@ -3,6 +3,8 @@
 
 static void assertReplaceSubstring(char *inputString, char *subString, char *replaceWithString, char *expected);
 static void assertConcatenate(char *input1, char *input2, char *expected);
+static const int TRUE = 1;
+static const int FALSE = 0;
 
 START_TEST(testReplaceSubstring)
 {
@@ -16,6 +18,12 @@ END_TEST
 START_TEST(testReplaceEntireString)
 {
   assertReplaceSubstring("Hello", "Hello", "World", "World");
+}
+END_TEST
+
+START_TEST(testReplaceWithNothingDoesNotAddWhiteSpace)
+{
+  assertReplaceSubstring("Hello", "o", "", "Hell");
 }
 END_TEST
 
@@ -57,6 +65,7 @@ Suite * makeCommonUtilsSuite(void)
 
     tcase_add_test(tcCore, testReplaceSubstring);
     tcase_add_test(tcCore, testReplaceEntireString);
+    tcase_add_test(tcCore, testReplaceWithNothingDoesNotAddWhiteSpace);
     tcase_add_test(tcCore, testReplaceStringThatDoesNotExistReturnsInput);
     tcase_add_test(tcCore, testConcatenateString);
 
