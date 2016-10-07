@@ -14,6 +14,8 @@
   "/bin/demo" : example of how to use the add and subtract functions
 
 ## Calculator Library
+  calculator.c
+  
   void add(char *romanNumeral1, char *romanNumeral2, char result[], int size)
 
   void subtract(char *romanNumeral1, char *romanNumeral2, char result[], int size)
