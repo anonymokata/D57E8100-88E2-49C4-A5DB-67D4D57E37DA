@@ -8,7 +8,7 @@
   The maximum roman numeral is 3999 (MMMCMXCIX).
   
 ## Build & Test
-  "make all" : compiles [Demo, Test-Suite] and run Test-Suite
+  "make all" : compiles [Demo, Test-Suite] and runs [Demo, Test-Suite].
 
   "make demo" : compiles Demo
 
