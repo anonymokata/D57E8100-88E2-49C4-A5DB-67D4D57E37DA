@@ -7,12 +7,12 @@ static int compareRomanNumerals(const void * a, const void * b);
 
 const char *sortRomanNumerals(const char *romanNumerals, char result[])
 {
-  char romanNumeralsArray[strlen(romanNumerals)];
-  strncpy(romanNumeralsArray, romanNumerals, strlen(romanNumerals) + 1);
+  char romanNumeralsCopy[100] = {};
+  strcpy(romanNumeralsCopy, romanNumerals);
 
-  qsort(romanNumeralsArray, strlen(romanNumerals), sizeof(char), compareRomanNumerals);
+  qsort(romanNumeralsCopy, strlen(romanNumerals), sizeof(char), compareRomanNumerals);
 
-  strcpy(result,romanNumeralsArray);
+  strcpy(result,romanNumeralsCopy);
   return result;
 }
 
@@ -27,8 +27,7 @@ int getValueOfRomanNumeral(const char romanNumeral){
   int romanNumeralsValue[] = {1,5,10,50,100,500,1000};
 
   int valueIndex;
-  int i;
-  for (i = 0; i < sizeof(romanNumeralsIndex); i++) {
+  for (int i = 0; i < sizeof(romanNumeralsIndex); i++) {
     if(romanNumeral == romanNumeralsIndex[i]){
       valueIndex = i;
     }

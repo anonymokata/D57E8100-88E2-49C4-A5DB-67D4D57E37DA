@@ -23,12 +23,14 @@ void expandNumerals(const char *romanNumerals, const char expandBy, char result[
 char findExpandMatchInRomanNumerals(const char *romanNumerals, const char expandBy){
   int romanNumeralsLength = strlen(romanNumerals)-1;
 
+  int expandMatchIndex = 0;
   for (int index = romanNumeralsLength; index >= 0; index--) {
     if(isGreaterThanOrEqual(romanNumerals[index], expandBy)){
-       return romanNumerals[index];
+        expandMatchIndex = index;
+        break;
     }
   }
-  return -1;
+  return romanNumerals[expandMatchIndex];
 }
 
 char *findExpandValues(const char expandBy){
