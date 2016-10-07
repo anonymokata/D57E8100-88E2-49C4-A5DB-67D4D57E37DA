@@ -7,11 +7,11 @@
 static const int EXPAND_ARRAY_SIZE = 6;
 static char expandIndexes[] = {'V','X','L','C','D','M'};
 static char *expandValues[] = {"IIIII","VV","XXXXX","LL","CCCCC","DD"};
-static char *findExpandValues(char expandBy);
-static char findExpandMatchInRomanNumerals(char *romanNumerals, char expandBy);
-static void replaceExpandByWithExpandedValues(char *romanNumerals, char expandMatch, char *expandedValues, char unSortedResult[]);
+static char *findExpandValues(const char expandBy);
+static char findExpandMatchInRomanNumerals(const char *romanNumerals, const char expandBy);
+static void replaceExpandByWithExpandedValues(const char *romanNumerals, const char expandMatch, const char *expandedValues, char unSortedResult[]);
 
-void expandNumerals(char *romanNumerals, char expandBy, char result[]){
+void expandNumerals(const char *romanNumerals, const char expandBy, char result[]){
   char expandMatch = findExpandMatchInRomanNumerals(romanNumerals, expandBy);
   char *expandedValues = findExpandValues(expandMatch);
 
@@ -20,7 +20,7 @@ void expandNumerals(char *romanNumerals, char expandBy, char result[]){
   sortRomanNumerals(unSortedResult, result);
 }
 
-char findExpandMatchInRomanNumerals(char *romanNumerals, char expandBy){
+char findExpandMatchInRomanNumerals(const char *romanNumerals, const char expandBy){
   int romanNumeralsLength = strlen(romanNumerals)-1;
 
   for (int index = romanNumeralsLength; index >= 0; index--) {
@@ -31,7 +31,7 @@ char findExpandMatchInRomanNumerals(char *romanNumerals, char expandBy){
   return -1;
 }
 
-char *findExpandValues(char expandBy){
+char *findExpandValues(const char expandBy){
   int matchIndex = 0;
   for (int i = 0; i < EXPAND_ARRAY_SIZE; i++) {
     if(expandIndexes[i] == expandBy){
@@ -41,7 +41,7 @@ char *findExpandValues(char expandBy){
   return expandValues[matchIndex];
 }
 
-void replaceExpandByWithExpandedValues(char *romanNumerals, char expandMatch, char *expandedValues, char unSortedResult[]){
+void replaceExpandByWithExpandedValues(const char *romanNumerals, const char expandMatch, const char *expandedValues, char unSortedResult[]){
     char expandedMatchString[2] = {};
     expandedMatchString[0] = expandMatch;
 

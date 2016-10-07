@@ -6,14 +6,14 @@
 #include "roman-numerals-reducer.h"
 #include "common-utils.h"
 
-static int hasInvalidBuffer(char buffer[], int size);
+static int hasInvalidBuffer(const char buffer[], const int size);
 
-void add(char *romanNumeral1, char *romanNumeral2, char result[], int size)
+void add(const char *romanNumeral1, const char *romanNumeral2, char result[], const int size)
 {
     if(hasInvalidBuffer(result,size)){
       return;
     }
-    
+
     char additiveNumerals1[100] = {'\0'};
     char additiveNumerals2[100] = {'\0'};
     char combinedNumerals[100] = {'\0'};
@@ -28,7 +28,7 @@ void add(char *romanNumeral1, char *romanNumeral2, char result[], int size)
     convertAdditiveToSubtractivePrefix(internalSumsNumerals,result);
 }
 
-void subtract(char *romanNumeral1, char *romanNumeral2, char result[], int size){
+void subtract(const char *romanNumeral1, const char *romanNumeral2, char result[], const int size){
   if(hasInvalidBuffer(result,size)){
     return;
   }
@@ -43,6 +43,6 @@ void subtract(char *romanNumeral1, char *romanNumeral2, char result[], int size)
   convertAdditiveToSubtractivePrefix(reducedNumerals,result);
 }
 
-int hasInvalidBuffer(char buffer[], int size){
+int hasInvalidBuffer(const char buffer[], const int size){
   return size < 100 || !buffer;
 }

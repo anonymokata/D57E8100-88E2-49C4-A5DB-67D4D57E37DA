@@ -1,7 +1,7 @@
 #ifndef CALCULATOR_H_
 #define CALCULATOR_H_
 
-void add(char *romanNumeral1, char *romanNumeral2, char result[], int size);
-void subtract(char *romanNumeral1, char *romanNumeral2, char result[], int size);
+void add(const char *romanNumeral1,const char *romanNumeral2, char result[], const int size);
+void subtract(const char *romanNumeral1,const char *romanNumeral2, char result[], const int size);
 
 #endif

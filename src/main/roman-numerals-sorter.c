@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static int getValueOfRomanNumeral(char romanNumeral);
+static int getValueOfRomanNumeral(const char romanNumeral);
 static int compareRomanNumerals(const void * a, const void * b);
 
 const char *sortRomanNumerals(const char *romanNumerals, char result[])
@@ -22,7 +22,7 @@ int compareRomanNumerals(const void * a, const void * b){
   return ( valueOfB - valueOfA);
 }
 
-int getValueOfRomanNumeral(char romanNumeral){
+int getValueOfRomanNumeral(const char romanNumeral){
   char romanNumeralsIndex[] = {'I','V','X','L','C','D','M'};
   int romanNumeralsValue[] = {1,5,10,50,100,500,1000};
 

@@ -6,11 +6,11 @@
 
 static int shouldContinue(const char reduceBy, const int loop);
 static void makeResult(const char *partialResult, const int loop, char result[]);
-static void removeCommonNumerals(char *romanNumeralsCopy, char *commonNumeral, char partialResult[]);
+static void removeCommonNumerals(const char *romanNumeralsCopy, const char *commonNumeral, char partialResult[]);
 static int containsReduceBy(const char *romanNumerals, const char *reduceBy);
 static int MAX_LOOP = 30;
 
-void reduceMatchingNumerals(char *romanNumerals, char reduceBy[], char result[]){
+void reduceMatchingNumerals(const char *romanNumerals, const char reduceBy[], char result[]){
   char partialResult[1000] = {};
   char romanNumeralsCopy[1000] = {};
   strcpy(romanNumeralsCopy, romanNumerals);
@@ -38,7 +38,7 @@ void reduceMatchingNumerals(char *romanNumerals, char reduceBy[], char result[])
   makeResult(partialResult, loop, result);
 }
 
-void removeCommonNumerals(char *romanNumeralsCopy, char *commonNumeral, char partialResult[]){
+void removeCommonNumerals(const char *romanNumeralsCopy, const char *commonNumeral, char partialResult[]){
   replaceSubstring(romanNumeralsCopy,  commonNumeral, "", partialResult);
 }
 
@@ -46,7 +46,7 @@ static int shouldContinue(const char reduceBy, const int loop){
   return reduceBy != '\0' && loop < MAX_LOOP;
 }
 
-static void makeResult(const char *partialResult, const int loop, char result[]){
+static void makeResult(const const char *partialResult, const const int loop, char result[]){
   if(loop >= MAX_LOOP){
     strcat(result, "REDUCER FAILED");
   }else{
