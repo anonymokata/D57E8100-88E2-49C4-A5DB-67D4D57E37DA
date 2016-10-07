@@ -1,7 +1,7 @@
 #include <check.h>
 #include "../main/roman-numerals-expander.h"
 
-static void assertExpandNumerals(char *input, char *expandBy, char *expected);
+static void assertExpandNumerals(char *input, char expandBy, char *expected);
 
 START_TEST(testExpandSingleNumeral)
 {
@@ -37,13 +37,7 @@ START_TEST(testExpandFirstNumeralLargerThanExpandBy)
 }
 END_TEST
 
-// START_TEST(testExpandNoMatch)
-// {
-//   assertExpandNumerals("I","C","EXPAND FAILED");
-// }
-// END_TEST
-
-static void assertExpandNumerals(char *input, char *expandBy, char *expected){
+static void assertExpandNumerals(char *input, char expandBy, char *expected){
   char result[100] = {'\0'};
   expandNumerals(input, expandBy, result);
   ck_assert_str_eq(result, expected);
@@ -60,7 +54,6 @@ Suite * makeRomanNumeralsExpanderSuite(void)
     tcase_add_test(tcCore, testExpandSingleNumeral);
     tcase_add_test(tcCore, testExpandRightMostOnly);
     tcase_add_test(tcCore, testExpandFirstNumeralLargerThanExpandBy);
-    // tcase_add_test(tcCore, testExpandNoMatch);
 
     suite_add_tcase(s, tcCore);
 

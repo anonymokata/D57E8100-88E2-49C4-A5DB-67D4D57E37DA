@@ -11,22 +11,24 @@ static int containsReduceBy(const char *romanNumerals, const char *reduceBy);
 static int MAX_LOOP = 30;
 
 void reduceMatchingNumerals(char *romanNumerals, char reduceBy[], char result[]){
-  char partialResult[1000] = {'\0'};
-  char romanNumeralsCopy[1000] = {'\0'};
+  char partialResult[1000] = {};
+  char romanNumeralsCopy[1000] = {};
   strcpy(romanNumeralsCopy, romanNumerals);
 
   int loop = 0;
   int index = 0;
   while(shouldContinue(reduceBy[index], loop)) {
+    char reduceByCharacter = reduceBy[index];
+    char reduceByCharacterString[2] = {};
+    reduceByCharacterString[0] = reduceByCharacter;
     partialResult[0] = '\0';
-    char *reduceByCharacter = reduceBy[index];
 
-    if(containsReduceBy(romanNumeralsCopy, &reduceByCharacter)){
-      removeCommonNumerals(romanNumeralsCopy,  &reduceByCharacter, partialResult);
+    if(containsReduceBy(romanNumeralsCopy, reduceByCharacterString)){
+      removeCommonNumerals(romanNumeralsCopy,  reduceByCharacterString, partialResult);
       index++;
     }
     else{
-      expandNumerals(romanNumeralsCopy, reduceByCharacter ,partialResult);
+      expandNumerals(romanNumeralsCopy, reduceByCharacter , partialResult);
     }
 
     loop++;

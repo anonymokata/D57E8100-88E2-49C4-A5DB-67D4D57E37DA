@@ -8,8 +8,9 @@ static char *makeAfterSubstring(const char *inputStringCopy, char *subString, ch
 static int doesNotContainSubstring(const char *inputString, const char *subString);
 static void doReplace(char *inputString, char *subString, char *replaceWithString, char result[]);
 static int findRomanNumeralKey(char numeral);
-static char romanNumeralKeys[7] = {'I','V','X','L','C','D','M'};
-static int romanNumeralValues[7] = {1,5,10,50,100,500,1000};
+static const int NUMERALS_ARRAY_SIZE = 7;
+static char romanNumeralKeys[] = {'I','V','X','L','C','D','M'};
+static int romanNumeralValues[] = {1,5,10,50,100,500,1000};
 
 void replaceSubstring(char *inputString, char *subString, char *replaceWithString, char result[])
 {
@@ -38,7 +39,7 @@ int isGreaterThanOrEqual(int romanNumeral, int compareTo){
 
 static int findRomanNumeralKey(char numeral){
   int key = 0;
-  for (int i = 0; i < 7; i++) {
+  for (int i = 0; i < NUMERALS_ARRAY_SIZE; i++) {
     if(romanNumeralKeys[i] == numeral){
       key = i;
     }

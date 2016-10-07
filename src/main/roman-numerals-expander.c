@@ -4,18 +4,20 @@
 #include "roman-numerals-sorter.h"
 #include "common-utils.h"
 
-static char expandIndexes[6] = {'V','X','L','C','D','M'};
-static char *expandValues[6] = {"IIIII","VV","XXXXX","LL","CCCCC","DD"};
+static const int EXPAND_ARRAY_SIZE = 6;
+static char expandIndexes[] = {'V','X','L','C','D','M'};
+static char *expandValues[] = {"IIIII","VV","XXXXX","LL","CCCCC","DD"};
 static char *findExpandValues(char expandBy);
 static char findExpandMatchInRomanNumerals(char *romanNumerals, char expandBy);
+static void replaceExpandByWithExpandedValues(char *romanNumerals, char expandMatch, char *expandedValues, char unSortedResult[]);
 
 void expandNumerals(char *romanNumerals, char expandBy, char result[]){
-  char *expandMatch = findExpandMatchInRomanNumerals(romanNumerals, expandBy);
-  char *expandedValue = findExpandValues(expandMatch);
+  char expandMatch = findExpandMatchInRomanNumerals(romanNumerals, expandBy);
+  char *expandedValues = findExpandValues(expandMatch);
 
-  char partialResult[100] = {'\0'};
-  replaceSubstring(romanNumerals, &expandMatch, expandedValue, partialResult);
-  sortRomanNumerals(partialResult, result);
+  char unSortedResult[100] = {};
+  replaceExpandByWithExpandedValues(romanNumerals, expandMatch, expandedValues, unSortedResult);
+  sortRomanNumerals(unSortedResult, result);
 }
 
 char findExpandMatchInRomanNumerals(char *romanNumerals, char expandBy){
@@ -26,14 +28,22 @@ char findExpandMatchInRomanNumerals(char *romanNumerals, char expandBy){
        return romanNumerals[index];
     }
   }
+  return -1;
 }
 
 char *findExpandValues(char expandBy){
   int matchIndex = 0;
-  for (int i = 0; i < 6; i++) {
+  for (int i = 0; i < EXPAND_ARRAY_SIZE; i++) {
     if(expandIndexes[i] == expandBy){
       matchIndex = i;
     }
   }
   return expandValues[matchIndex];
+}
+
+void replaceExpandByWithExpandedValues(char *romanNumerals, char expandMatch, char *expandedValues, char unSortedResult[]){
+    char expandedMatchString[2] = {};
+    expandedMatchString[0] = expandMatch;
+
+    replaceSubstring(romanNumerals, expandedMatchString, expandedValues, unSortedResult);
 }

@@ -6,14 +6,14 @@
 static const int SUBTRACTIVE_PREFIX_ARRAY_SIZE = 6;
 static const int ADDITIVE_PREFIX_ARRAY_SIZE = 6;
 static const int INTERNAL_SUM_ARRAY_SIZE = 6;
-static char *subtractivePrefixes[6] = {"IV","IX","XL","XC","CD","CM"};
-static char *additivePrefixes[6] = {"IIII","VIIII","XXXX","LXXXX","CCCC","DCCCC"};
-static char *internalSumPrefix[6] = {"IIIII","VV","XXXXX","LL","CCCCC","DD"};
-static char *internalSumValue[6] = {"V","X","L","C","D","M"};
+static char *subtractivePrefixes[] = {"IV","IX","XL","XC","CD","CM"};
+static char *additivePrefixes[] = {"IIII","VIIII","XXXX","LXXXX","CCCC","DCCCC"};
+static char *internalSumPrefix[] = {"IIIII","VV","XXXXX","LL","CCCCC","DD"};
+static char *internalSumValue[] = {"V","X","L","C","D","M"};
 
 char *convertSubtractiveToAdditivePrefix(char *romanNumerals, char result[]){
-  char partialResult[100] = {'\0'};
-  char romanNumeralsCopy[100] = {'\0'};
+  char partialResult[100] = {};
+  char romanNumeralsCopy[100] = {};
   strcpy(romanNumeralsCopy, romanNumerals);
 
   for (int i = 0; i < SUBTRACTIVE_PREFIX_ARRAY_SIZE; i++) {
@@ -27,10 +27,9 @@ char *convertSubtractiveToAdditivePrefix(char *romanNumerals, char result[]){
 }
 
 char *convertAdditiveToSubtractivePrefix(char *romanNumerals, char result[]){
-  char partialResult[100] = {'\0'};
-  char romanNumeralsCopy[100] = {'\0'};
+  char partialResult[100] = {};
+  char romanNumeralsCopy[100] = {};
   strcpy(romanNumeralsCopy, romanNumerals);
-
 
   for (int i = ADDITIVE_PREFIX_ARRAY_SIZE - 1; i >= 0; i--) {
       partialResult[0] = '\0';
@@ -43,8 +42,8 @@ char *convertAdditiveToSubtractivePrefix(char *romanNumerals, char result[]){
 }
 
 char *convertInternalSums(char *romanNumerals, char result[]){
-  char partialResult[100] = {'\0'};
-  char romanNumeralsCopy[100] = {'\0'};
+  char partialResult[100] = {};
+  char romanNumeralsCopy[100] = {};
   strcpy(romanNumeralsCopy, romanNumerals);
 
   for (int i = 0; i < INTERNAL_SUM_ARRAY_SIZE; i++) {
