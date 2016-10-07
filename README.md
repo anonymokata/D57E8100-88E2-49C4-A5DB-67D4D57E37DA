@@ -1,14 +1,14 @@
 # roman-numeral-calculator
-  A library which allows the addition and subtraction of Roman Numerals.
+  A library which allows the addition and subtraction of Roman Numerals
   
   I + I = II
   
   X - I = IX
   
-  The maximum roman numeral is 3999 (MMMCMXCIX).
+  The maximum Roman Numeral is 3999 (MMMCMXCIX)
   
 ## Build & Test
-  "make all" : compiles [Demo, Test-Suite] and runs [Demo, Test-Suite].
+  "make all" : compiles [Demo, Test-Suite] and runs [Demo, Test-Suite]
 
   "make demo" : compiles Demo
 
