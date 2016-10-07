@@ -8,11 +8,11 @@ static int shouldContinue(const char reduceBy, const int loop);
 static void makeResult(const char *partialResult, const int loop, char result[]);
 static void removeCommonNumerals(char *romanNumeralsCopy, char *commonNumeral, char partialResult[]);
 static int containsReduceBy(const char *romanNumerals, const char *reduceBy);
-static int MAX_LOOP = 20;
+static int MAX_LOOP = 30;
 
 void reduceMatchingNumerals(char *romanNumerals, char reduceBy[], char result[]){
-  char partialResult[100] = {'\0'};
-  char romanNumeralsCopy[100] = {'\0'};
+  char partialResult[1000] = {'\0'};
+  char romanNumeralsCopy[1000] = {'\0'};
   strcpy(romanNumeralsCopy, romanNumerals);
 
   int loop = 0;

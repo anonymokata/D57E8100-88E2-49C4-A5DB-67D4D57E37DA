@@ -40,10 +40,10 @@ START_TEST(testMultiplePasses)
 }
 END_TEST
 
-START_TEST(testStopOn20Loops)
+START_TEST(testStopOn30Loops)
 {
-  assertReduceNumerals("VIIIIIIIIIIIIIIIIIII" ,"IIIIIIIIIIIIIIIIIII","V");
-  assertReduceNumerals("VIIIIIIIIIIIIIIIIIII", "IIIIIIIIIIIIIIIIIIII","REDUCER FAILED");
+  assertReduceNumerals("VIIIIIIIIIIIIIIIIIIIIIIIIIIIII" ,"IIIIIIIIIIIIIIIIIIIIIIIIIIIII","V");
+  assertReduceNumerals("VIIIIIIIIIIIIIIIIIIIIIIIIIIIII", "IIIIIIIIIIIIIIIIIIIIIIIIIIIIII","REDUCER FAILED");
 }
 END_TEST
 
@@ -67,7 +67,7 @@ Suite * makeRomanNumeralsReducerSuite(void)
     tcase_add_test(tcCore, testExpandRightSideWhenCannotReduceRemainder);
     tcase_add_test(tcCore, testDoNotExpandSecondTimeIfNoRemaineder);
     tcase_add_test(tcCore, testMultiplePasses);
-    tcase_add_test(tcCore, testStopOn20Loops);
+    tcase_add_test(tcCore, testStopOn30Loops);
     suite_add_tcase(s, tcCore);
 
     return s;

@@ -69,15 +69,55 @@ START_TEST(testSubtractConvertsBackToSubtractivePrefixes)
 }
 END_TEST
 
+START_TEST(testSubtractBufferNeedsToBeAtleast100)
+{
+  char result1[99] = {'\0'};
+  char expected[99] = {'\0'};
+  subtract("II", "I", result1, 99);
+  ck_assert_str_eq(result1, expected);
+
+  char result2[100] = {'\0'};
+  subtract("II", "I", result2, 100);
+  ck_assert_str_eq(result2, "I");
+}
+END_TEST
+
+START_TEST(testSubtractBufferIsNotNull)
+{
+  subtract("II", "I", NULL, 100);
+  ck_assert_str_eq("DID NOT BLOW UP", "DID NOT BLOW UP");
+}
+END_TEST
+
+START_TEST(testAddBufferNeedsToBeAtleast100)
+{
+  char result1[99] = {'\0'};
+  char expected[99] = {'\0'};
+  add("II", "I", result1, 99);
+  ck_assert_str_eq(result1, expected);
+
+  char result2[100] = {'\0'};
+  add("II", "I", result2, 100);
+  ck_assert_str_eq(result2, "III");
+}
+END_TEST
+
+START_TEST(testAddBufferIsNotNull)
+{
+  add("II", "I", NULL, 100);
+  ck_assert_str_eq("DID NOT BLOW UP", "DID NOT BLOW UP");
+}
+END_TEST
+
 static void assertAdd(char *firstNumeral, char *secondNumeral, char *expected){
   char result[100] = {'\0'};
-  add(firstNumeral, secondNumeral, result);
+  add(firstNumeral, secondNumeral, result, 100);
   ck_assert_str_eq(result, expected);
 }
 
 static void assertSubtract(char *firstNumeral, char *secondNumeral, char *expected){
   char result[100] = {'\0'};
-  subtract(firstNumeral, secondNumeral, result);
+  subtract(firstNumeral, secondNumeral, result, 100);
   ck_assert_str_eq(result, expected);
 }
 
@@ -98,6 +138,10 @@ Suite * makeCalculatorSuite(void)
     tcase_add_test(tcCore, testSubtractReducesCommonNumerals);
     tcase_add_test(tcCore, testSubtractHandlesSubtractivePrefixes);
     tcase_add_test(tcCore, testSubtractConvertsBackToSubtractivePrefixes);
+    tcase_add_test(tcCore, testSubtractBufferNeedsToBeAtleast100);
+    tcase_add_test(tcCore, testSubtractBufferIsNotNull);
+    tcase_add_test(tcCore, testAddBufferNeedsToBeAtleast100);
+    tcase_add_test(tcCore, testAddBufferIsNotNull);
     suite_add_tcase(s, tcCore);
 
     return s;
