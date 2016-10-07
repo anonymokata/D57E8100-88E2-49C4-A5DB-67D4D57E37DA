@@ -77,7 +77,7 @@ END_TEST
 static void assertAdd(char *firstNumeral, char *secondNumeral, char *expectedNumeral){
   char result[100] = {'\0'};
   expectedNumeral[strlen(expectedNumeral)-1] = '\0';
-  add(firstNumeral, secondNumeral, result);
+  add(firstNumeral, secondNumeral, result, 100);
 
   ck_assert_str_eq(result, expectedNumeral);
 }
@@ -85,7 +85,7 @@ static void assertAdd(char *firstNumeral, char *secondNumeral, char *expectedNum
 static void assertSubtract(char *firstNumeral, char *secondNumeral, char *expectedNumeral){
   char result[100] = {'\0'};
   expectedNumeral[strlen(expectedNumeral)-1] = '\0';
-  subtract(expectedNumeral,secondNumeral, result);
+  subtract(expectedNumeral,secondNumeral, result, 100);
 
   ck_assert_str_eq(result, firstNumeral);
 }
