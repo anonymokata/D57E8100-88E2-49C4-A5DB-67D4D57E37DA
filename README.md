@@ -1,4 +1,10 @@
 # roman-numeral-calculator
+  A library which allows the addition and subtraction of Roman Numerals.
+  
+  I + I = II
+  
+  X - I = IX
+  
 ## Build & Test
   "make all" : compiles [Demo, Test-Suite] and run Test-Suite
 
@@ -13,11 +19,11 @@
 ## Demo
   "/bin/demo" : example of how to use the add and subtract functions
 
-## Calculator Library
+## Library
   calculator.c
   
   void add(char *romanNumeral1, char *romanNumeral2, char result[], int size)
 
   void subtract(char *romanNumeral1, char *romanNumeral2, char result[], int size)
 
-  functions add and subtract require a buffer of size > **100**
+  functions add and subtract require a **result[]** of **size > 100**
