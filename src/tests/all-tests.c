@@ -5,7 +5,7 @@
 #include "roman-numerals-expander-test.h"
 #include "roman-numerals-converter-test.h"
 #include "common-utils-test.h"
-#include "fitness-test.h"
+#include "acceptance-test.h"
 
 int main(void)
 {
@@ -16,12 +16,12 @@ int main(void)
   int EXIT_FAILURE = 1;
 
   srunner_add_suite (sr, makeCalculatorSuite());
-  // srunner_add_suite (sr, makeRomanNumeralsSorterSuite());
-  // srunner_add_suite (sr, makeRomanNumeralsConverterSuite());
-  // srunner_add_suite (sr, makeRomanNumeralsReducerSuite());
-  // srunner_add_suite (sr, makeRomanNumeralsExpanderSuite());
-  // srunner_add_suite (sr, makeCommonUtilsSuite());
-  // srunner_add_suite (sr, makeFitnessSuite());
+  srunner_add_suite (sr, makeRomanNumeralsSorterSuite());
+  srunner_add_suite (sr, makeRomanNumeralsConverterSuite());
+  srunner_add_suite (sr, makeRomanNumeralsReducerSuite());
+  srunner_add_suite (sr, makeRomanNumeralsExpanderSuite());
+  srunner_add_suite (sr, makeCommonUtilsSuite());
+  srunner_add_suite (sr, makeAcceptanceSuite());
 
   srunner_run_all(sr, CK_ENV);
   number_failed = srunner_ntests_failed(sr);

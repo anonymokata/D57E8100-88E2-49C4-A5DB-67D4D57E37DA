@@ -10,7 +10,7 @@ static void assertSubtract(char *firstNumeral, char *secondNumeral, char *expect
 static FILE *openFileStreamAdd();
 static FILE *openFileStreamSubtract();
 
-START_TEST(testAddFitness)
+START_TEST(testAddAcceptance)
 {
   char line[100] = {'\0'};
   char lineCopy[100] = {'\0'};
@@ -42,14 +42,13 @@ START_TEST(testAddFitness)
 }
 END_TEST
 
-START_TEST(testSubtractFitness)
+START_TEST(testSubtractAcceptance)
 {
   char line[100] = {'\0'};
   char lineCopy[100] = {'\0'};
   char firstNumeral[100] = {'\0'};
   char secondNumeral[100] = {'\0'};
   char expectedNumeral[100] = {'\0'};
-
   FILE *stream = openFileStreamSubtract();
 
   while (fgets(line, 1024, stream))
@@ -85,17 +84,18 @@ static void assertAdd(char *firstNumeral, char *secondNumeral, char *expectedNum
 static void assertSubtract(char *firstNumeral, char *secondNumeral, char *expectedNumeral){
   char result[100] = {'\0'};
   expectedNumeral[strlen(expectedNumeral)-1] = '\0';
-  subtract(expectedNumeral,secondNumeral, result, 100);
 
-  ck_assert_str_eq(result, firstNumeral);
+  subtract(firstNumeral,secondNumeral, result, 100);
+
+  ck_assert_str_eq(result, expectedNumeral);
 }
 
 static FILE *openFileStreamAdd(){
-  return fopen("src/tests/fitness-test-data-add", "r");
+  return fopen("src/tests/acceptance-test-data-add", "r");
 }
 
 static FILE *openFileStreamSubtract(){
-  return fopen("src/tests/fitness-test-data-subtract", "r");
+  return fopen("src/tests/acceptance-test-data-subtract", "r");
 }
 
 static const char *getfield(char* line, int num)
@@ -111,16 +111,16 @@ static const char *getfield(char* line, int num)
     return NULL;
 }
 
-Suite * makeFitnessSuite(void)
+Suite * makeAcceptanceSuite(void)
 {
     Suite *s;
     TCase *tcCore;
 
-    s = suite_create("Fitness Suite");
+    s = suite_create("Acceptance Suite");
     tcCore = tcase_create("Core");
 
-    tcase_add_test(tcCore, testAddFitness);
-    tcase_add_test(tcCore, testSubtractFitness);
+    tcase_add_test(tcCore, testAddAcceptance);
+    tcase_add_test(tcCore, testSubtractAcceptance);
     suite_add_tcase(s, tcCore);
 
     return s;
