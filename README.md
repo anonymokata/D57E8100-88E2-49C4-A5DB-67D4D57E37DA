@@ -28,4 +28,4 @@
 
   void subtract(char *romanNumeral1, char *romanNumeral2, char result[], int size)
 
-  functions add and subtract require a **result[]** of **size > 100**
+  functions add and subtract require a **result[]** of **size >= 100**
