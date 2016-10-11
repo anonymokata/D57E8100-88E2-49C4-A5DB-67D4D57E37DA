@@ -67,6 +67,24 @@ START_TEST(testIsGreaterOrEqual)
 }
 END_TEST
 
+START_TEST(testGetRomanNumeralSortIndex)
+{
+  ck_assert_int_eq(getRomanNumeralSortIndex('I'), 0);
+  ck_assert_int_eq(getRomanNumeralSortIndex('V'), 1);
+  ck_assert_int_eq(getRomanNumeralSortIndex('X'), 2);
+  ck_assert_int_eq(getRomanNumeralSortIndex('L'), 3);
+  ck_assert_int_eq(getRomanNumeralSortIndex('C'), 4);
+  ck_assert_int_eq(getRomanNumeralSortIndex('D'), 5);
+  ck_assert_int_eq(getRomanNumeralSortIndex('M'), 6);
+}
+END_TEST
+
+START_TEST(testGetRomanNumeralSortIndexUnknownReturnsNegativeOne)
+{
+  ck_assert_int_eq(getRomanNumeralSortIndex('A'), -1);
+}
+END_TEST
+
 static void assertReplaceSubstring(char *inputString, char *subString, char *replaceWithString, char *expected){
   char result[100] = {'\0'};
   replaceSubstring(inputString, subString, replaceWithString, result);
@@ -95,6 +113,8 @@ Suite * makeCommonUtilsSuite(void)
     tcase_add_test(tcCore, testConcatenateString);
     tcase_add_test(tcCore, testIsGreaterThanAllNumerals);
     tcase_add_test(tcCore, testIsGreaterOrEqual);
+    tcase_add_test(tcCore, testGetRomanNumeralSortIndex);
+    tcase_add_test(tcCore, testGetRomanNumeralSortIndexUnknownReturnsNegativeOne);
 
     suite_add_tcase(s, tcCore);
 

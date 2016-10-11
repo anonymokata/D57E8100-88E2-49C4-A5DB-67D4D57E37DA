@@ -7,10 +7,8 @@ static char *makeBeforeSubstring(const char *inputStringCopy, const char *subStr
 static char *makeAfterSubstring(const char *inputStringCopy, const char *subString, char *afterSubstring);
 static int doesNotContainSubstring(const char *inputString, const char *subString);
 static void doReplace(const char *inputString, const char *subString, const char *replaceWithString, char result[]);
-static int findRomanNumeralKey(const char numeral);
 static const int NUMERALS_ARRAY_SIZE = 7;
-static char romanNumeralKeys[] = {'I','V','X','L','C','D','M'};
-static int romanNumeralValues[] = {1,5,10,50,100,500,1000};
+static char sortedRomanNumerals[] = {'I','V','X','L','C','D','M'};
 
 void replaceSubstring(const char *inputString, const char *subString, const char *replaceWithString, char result[])
 {
@@ -27,24 +25,21 @@ void concatenate(const char* romanNumeral1, const char* romanNumeral2, char resu
   strcat(result, romanNumeral2);
 }
 
-int isGreaterThanOrEqual(const int romanNumeral, const int compareTo){
-  int romanNumeralKey = findRomanNumeralKey(romanNumeral);
-  int compareToKey = findRomanNumeralKey(compareTo);
-
-  int romanNumeralValue = romanNumeralValues[romanNumeralKey];
-  int compareToValue = romanNumeralValues[compareToKey];
-
-  return romanNumeralValue >= compareToValue;
-}
-
-static int findRomanNumeralKey(const char numeral){
-  int key = 0;
-  for (int i = 0; i < NUMERALS_ARRAY_SIZE; i++) {
-    if(romanNumeralKeys[i] == numeral){
-      key = i;
+int getRomanNumeralSortIndex(const char romanNumeral){
+  int sortIndex = -1;
+  for (int index = 0; index < sizeof(sortedRomanNumerals); index++) {
+    if(romanNumeral == sortedRomanNumerals[index]){
+      sortIndex = index;
     }
   }
-  return key;
+  return sortIndex;
+}
+
+int isGreaterThanOrEqual(const char romanNumeral, const char compareTo){
+  int romanNumeralSortIndex = getRomanNumeralSortIndex(romanNumeral);
+  int compareToSortIndex = getRomanNumeralSortIndex(compareTo);
+
+  return romanNumeralSortIndex >= compareToSortIndex;
 }
 
 static void doReplace(const char *inputString, const char *subString, const char *replaceWithString, char result[]){

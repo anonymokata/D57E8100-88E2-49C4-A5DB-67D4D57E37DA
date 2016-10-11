@@ -3,6 +3,7 @@
 
 void replaceSubstring(const char *inputString, const char *substring, const char *replaceWith, char result[]);
 void concatenate(const char *romanNumeral1, const char *romanNumeral2, char result[]);
-int isGreaterThanOrEqual(const int romanNumeral, const int compareTo);
+int isGreaterThanOrEqual(const char romanNumeral, const char compareTo);
+int getRomanNumeralSortIndex(const char romanNumeral);
 
 #endif
