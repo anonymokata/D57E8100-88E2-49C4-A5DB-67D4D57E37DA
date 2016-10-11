@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static int getValueOfRomanNumeral(const char romanNumeral);
+static int getRomanNumeralSortIndex(const char romanNumeral);
 static int compareRomanNumerals(const void * a, const void * b);
 
 const char *sortRomanNumerals(const char *romanNumerals, char result[])
@@ -16,22 +16,21 @@ const char *sortRomanNumerals(const char *romanNumerals, char result[])
   return result;
 }
 
-int compareRomanNumerals(const void * a, const void * b){
-  int valueOfA = getValueOfRomanNumeral(*(char*)a);
-  int valueOfB = getValueOfRomanNumeral(*(char*)b);
-  return ( valueOfB - valueOfA);
+int compareRomanNumerals(const void *a, const void *b){
+  int sortIndexOfA = getRomanNumeralSortIndex(*(char*)a);
+  int sortIndexOfB = getRomanNumeralSortIndex(*(char*)b);
+  return sortIndexOfA < sortIndexOfB;
 }
 
-int getValueOfRomanNumeral(const char romanNumeral){
-  char romanNumeralsIndex[] = {'I','V','X','L','C','D','M'};
-  int romanNumeralsValue[] = {1,5,10,50,100,500,1000};
+int getRomanNumeralSortIndex(const char romanNumeral){
+  char sortedRomanNumerals[] = {'I','V','X','L','C','D','M'};
 
-  int valueIndex;
-  for (int i = 0; i < sizeof(romanNumeralsIndex); i++) {
-    if(romanNumeral == romanNumeralsIndex[i]){
-      valueIndex = i;
+  int sortIndex = 0;
+  for (int index = 0; index < sizeof(sortedRomanNumerals); index++) {
+    if(romanNumeral == sortedRomanNumerals[index]){
+      sortIndex = index;
     }
   }
 
-  return romanNumeralsValue[valueIndex];
+  return sortIndex;
 }
