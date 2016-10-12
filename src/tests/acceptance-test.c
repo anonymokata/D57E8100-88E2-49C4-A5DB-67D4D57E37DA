@@ -5,6 +5,8 @@
 #include "../main/calculator.h"
 #include "test-constants.h"
 
+#define READ_LINE_LENGTH 1024
+
 static const char *getfield(char* line, int num);
 static void assertAdd(char *firstNumeral, char *secondNumeral, char *expected);
 static void assertSubtract(char *firstNumeral, char *secondNumeral, char *expected);
@@ -21,7 +23,7 @@ START_TEST(testAddAcceptance)
 
   FILE *stream = openFileStreamAdd();
 
-  while (fgets(line, 1024, stream))
+  while (fgets(line, READ_LINE_LENGTH, stream))
   {
       firstNumeral[0] = '\0';
       secondNumeral[0] = '\0';
@@ -52,7 +54,7 @@ START_TEST(testSubtractAcceptance)
   char expectedNumeral[TEST_BUFFER_SIZE] = {'\0'};
   FILE *stream = openFileStreamSubtract();
 
-  while (fgets(line, 1024, stream))
+  while (fgets(line, READ_LINE_LENGTH, stream))
   {
       firstNumeral[0] = '\0';
       secondNumeral[0] = '\0';
