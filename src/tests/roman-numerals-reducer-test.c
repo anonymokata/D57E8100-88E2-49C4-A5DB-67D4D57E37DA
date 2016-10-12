@@ -1,5 +1,6 @@
 #include <check.h>
 #include "../main/roman-numerals-reducer.h"
+#include "test-constants.h"
 
 static void assertReduceNumerals(char *input, char *reduceBy, char *expected);
 
@@ -49,7 +50,7 @@ END_TEST
 
 
 static void assertReduceNumerals(char *input, char *reduceBy, char *expected){
-  char result[100] = {'\0'};
+  char result[TEST_BUFFER_SIZE] = {'\0'};
   reduceMatchingNumerals(input, reduceBy, result);
   ck_assert_str_eq(result, expected);
 }

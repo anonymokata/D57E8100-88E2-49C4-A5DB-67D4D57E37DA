@@ -3,6 +3,7 @@
 #include <string.h>
 #include "roman-numerals-sorter.h"
 #include "common-utils.h"
+#include "constants.h"
 
 static const int EXPAND_ARRAY_SIZE = 6;
 static char expandIndexes[] = {'V','X','L','C','D','M'};
@@ -15,7 +16,7 @@ void expandNumerals(const char *romanNumerals, const char expandBy, char result[
   char expandMatch = findExpandMatchInRomanNumerals(romanNumerals, expandBy);
   char *expandedValues = findExpandValues(expandMatch);
 
-  char unSortedResult[100] = {};
+  char unSortedResult[BUFFER_SIZE] = {};
   replaceExpandByWithExpandedValues(romanNumerals, expandMatch, expandedValues, unSortedResult);
   sortRomanNumerals(unSortedResult, result);
 }

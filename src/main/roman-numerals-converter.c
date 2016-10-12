@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "common-utils.h"
+#include "constants.h"
 
 static const int SUBTRACTIVE_PREFIX_ARRAY_SIZE = 6;
 static const int ADDITIVE_PREFIX_ARRAY_SIZE = 6;
@@ -12,8 +13,8 @@ static char *internalSumPrefix[] = {"IIIII","VV","XXXXX","LL","CCCCC","DD"};
 static char *internalSumValue[] = {"V","X","L","C","D","M"};
 
 void convertSubtractiveToAdditivePrefix(const char *romanNumerals, char result[]){
-  char partialResult[100] = {};
-  char romanNumeralsCopy[100] = {};
+  char partialResult[BUFFER_SIZE] = {};
+  char romanNumeralsCopy[BUFFER_SIZE] = {};
   strcpy(romanNumeralsCopy, romanNumerals);
 
   for (int i = 0; i < SUBTRACTIVE_PREFIX_ARRAY_SIZE; i++) {
@@ -26,8 +27,8 @@ void convertSubtractiveToAdditivePrefix(const char *romanNumerals, char result[]
 }
 
 void convertAdditiveToSubtractivePrefix(const char *romanNumerals, char result[]){
-  char partialResult[100] = {};
-  char romanNumeralsCopy[100] = {};
+  char partialResult[BUFFER_SIZE] = {};
+  char romanNumeralsCopy[BUFFER_SIZE] = {};
   strcpy(romanNumeralsCopy, romanNumerals);
 
   for (int i = ADDITIVE_PREFIX_ARRAY_SIZE - 1; i >= 0; i--) {
@@ -40,8 +41,8 @@ void convertAdditiveToSubtractivePrefix(const char *romanNumerals, char result[]
 }
 
 void convertInternalSums(const char *romanNumerals, char result[]){
-  char partialResult[100] = {};
-  char romanNumeralsCopy[100] = {};
+  char partialResult[BUFFER_SIZE] = {};
+  char romanNumeralsCopy[BUFFER_SIZE] = {};
   strcpy(romanNumeralsCopy, romanNumerals);
 
   for (int i = 0; i < INTERNAL_SUM_ARRAY_SIZE; i++) {

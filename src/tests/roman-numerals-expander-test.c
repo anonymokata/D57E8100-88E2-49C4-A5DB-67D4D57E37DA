@@ -1,5 +1,6 @@
 #include <check.h>
 #include "../main/roman-numerals-expander.h"
+#include "test-constants.h"
 
 static void assertExpandNumerals(char *input, char expandBy, char *expected);
 
@@ -38,7 +39,7 @@ START_TEST(testExpandFirstNumeralLargerThanExpandBy)
 END_TEST
 
 static void assertExpandNumerals(char *input, char expandBy, char *expected){
-  char result[100] = {'\0'};
+  char result[TEST_BUFFER_SIZE] = {'\0'};
   expandNumerals(input, expandBy, result);
   ck_assert_str_eq(result, expected);
 }

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../main/calculator.h"
+#include "test-constants.h"
 
 static const char *getfield(char* line, int num);
 static void assertAdd(char *firstNumeral, char *secondNumeral, char *expected);
@@ -12,11 +13,11 @@ static FILE *openFileStreamSubtract();
 
 START_TEST(testAddAcceptance)
 {
-  char line[100] = {'\0'};
-  char lineCopy[100] = {'\0'};
-  char firstNumeral[100] = {'\0'};
-  char secondNumeral[100] = {'\0'};
-  char expectedNumeral[100] = {'\0'};
+  char line[TEST_BUFFER_SIZE] = {'\0'};
+  char lineCopy[TEST_BUFFER_SIZE] = {'\0'};
+  char firstNumeral[TEST_BUFFER_SIZE] = {'\0'};
+  char secondNumeral[TEST_BUFFER_SIZE] = {'\0'};
+  char expectedNumeral[TEST_BUFFER_SIZE] = {'\0'};
 
   FILE *stream = openFileStreamAdd();
 
@@ -44,11 +45,11 @@ END_TEST
 
 START_TEST(testSubtractAcceptance)
 {
-  char line[100] = {'\0'};
-  char lineCopy[100] = {'\0'};
-  char firstNumeral[100] = {'\0'};
-  char secondNumeral[100] = {'\0'};
-  char expectedNumeral[100] = {'\0'};
+  char line[TEST_BUFFER_SIZE] = {'\0'};
+  char lineCopy[TEST_BUFFER_SIZE] = {'\0'};
+  char firstNumeral[TEST_BUFFER_SIZE] = {'\0'};
+  char secondNumeral[TEST_BUFFER_SIZE] = {'\0'};
+  char expectedNumeral[TEST_BUFFER_SIZE] = {'\0'};
   FILE *stream = openFileStreamSubtract();
 
   while (fgets(line, 1024, stream))
@@ -74,18 +75,18 @@ START_TEST(testSubtractAcceptance)
 END_TEST
 
 static void assertAdd(char *firstNumeral, char *secondNumeral, char *expectedNumeral){
-  char result[100] = {'\0'};
+  char result[TEST_BUFFER_SIZE] = {'\0'};
   expectedNumeral[strlen(expectedNumeral)-1] = '\0';
-  add(firstNumeral, secondNumeral, result, 100);
+  add(firstNumeral, secondNumeral, result, TEST_BUFFER_SIZE);
 
   ck_assert_str_eq(result, expectedNumeral);
 }
 
 static void assertSubtract(char *firstNumeral, char *secondNumeral, char *expectedNumeral){
-  char result[100] = {'\0'};
+  char result[TEST_BUFFER_SIZE] = {'\0'};
   expectedNumeral[strlen(expectedNumeral)-1] = '\0';
 
-  subtract(firstNumeral,secondNumeral, result, 100);
+  subtract(firstNumeral,secondNumeral, result, TEST_BUFFER_SIZE);
 
   ck_assert_str_eq(result, expectedNumeral);
 }

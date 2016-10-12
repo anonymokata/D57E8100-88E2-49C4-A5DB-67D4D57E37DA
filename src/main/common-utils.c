@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "constants.h"
 
 static void concatenateReplaceSubstring(const char *beforeSubstring, const char *replaceWithString, const char *afterSubstring, char result[]);
 static char *makeBeforeSubstring(const char *inputStringCopy, const char *subString, char *beforeSubstring);
@@ -43,13 +44,13 @@ int isGreaterThanOrEqual(const char romanNumeral, const char compareTo){
 }
 
 static void doReplace(const char *inputString, const char *subString, const char *replaceWithString, char result[]){
-  char inputStringCopy[100] = {};
+  char inputStringCopy[BUFFER_SIZE] = {};
   strcat(inputStringCopy, inputString);
 
-  char beforeSubstring[100] = {};
+  char beforeSubstring[BUFFER_SIZE] = {};
   makeBeforeSubstring(inputStringCopy, subString, beforeSubstring);
 
-  char afterSubstring[100] = {};
+  char afterSubstring[BUFFER_SIZE] = {};
   makeAfterSubstring(inputStringCopy, subString, afterSubstring);
 
   concatenateReplaceSubstring(beforeSubstring, replaceWithString, afterSubstring, result);

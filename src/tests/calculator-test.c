@@ -1,5 +1,6 @@
 #include <check.h>
 #include "../main/calculator.h"
+#include "test-constants.h"
 
 static void assertAdd(char *firstNumeral, char *secondNumeral, char *result);
 static void assertSubtract(char *firstNumeral, char *secondNumeral, char *expected);
@@ -76,15 +77,15 @@ START_TEST(testSubtractBufferNeedsToBeAtleast100)
   subtract("II", "I", result1, 99);
   ck_assert_str_eq(result1, expected);
 
-  char result2[100] = {'\0'};
-  subtract("II", "I", result2, 100);
+  char result2[TEST_BUFFER_SIZE] = {'\0'};
+  subtract("II", "I", result2, TEST_BUFFER_SIZE);
   ck_assert_str_eq(result2, "I");
 }
 END_TEST
 
 START_TEST(testSubtractBufferIsNotNull)
 {
-  subtract("II", "I", NULL, 100);
+  subtract("II", "I", NULL, TEST_BUFFER_SIZE);
   ck_assert_str_eq("DID NOT BLOW UP", "DID NOT BLOW UP");
 }
 END_TEST
@@ -93,31 +94,32 @@ START_TEST(testAddBufferNeedsToBeAtleast100)
 {
   char result1[99] = {'\0'};
   char expected[99] = {'\0'};
+
   add("II", "I", result1, 99);
   ck_assert_str_eq(result1, expected);
 
-  char result2[100] = {'\0'};
-  add("II", "I", result2, 100);
+  char result2[TEST_BUFFER_SIZE] = {'\0'};
+  add("II", "I", result2, TEST_BUFFER_SIZE);
   ck_assert_str_eq(result2, "III");
 }
 END_TEST
 
 START_TEST(testAddBufferIsNotNull)
 {
-  add("II", "I", NULL, 100);
+  add("II", "I", NULL, TEST_BUFFER_SIZE);
   ck_assert_str_eq("DID NOT BLOW UP", "DID NOT BLOW UP");
 }
 END_TEST
 
 static void assertAdd(char *firstNumeral, char *secondNumeral, char *expected){
-  char result[100] = {'\0'};
-  add(firstNumeral, secondNumeral, result, 100);
+  char result[TEST_BUFFER_SIZE] = {'\0'};
+  add(firstNumeral, secondNumeral, result, TEST_BUFFER_SIZE);
   ck_assert_str_eq(result, expected);
 }
 
 static void assertSubtract(char *firstNumeral, char *secondNumeral, char *expected){
-  char result[100] = {'\0'};
-  subtract(firstNumeral, secondNumeral, result, 100);
+  char result[TEST_BUFFER_SIZE] = {'\0'};
+  subtract(firstNumeral, secondNumeral, result, TEST_BUFFER_SIZE);
   ck_assert_str_eq(result, expected);
 }
 

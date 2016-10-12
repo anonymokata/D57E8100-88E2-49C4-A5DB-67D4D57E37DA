@@ -1,5 +1,6 @@
 #include <check.h>
 #include "../main/roman-numerals-converter.h"
+#include "test-constants.h"
 
 static void assertInternalSums(char *input, char *expected);
 static void assertConvertSubtractiveToAdditivePrefix(char *input, char *expected);
@@ -84,19 +85,19 @@ START_TEST(testConvertToSubtractivePrefix_substring)
 END_TEST
 
 static void assertInternalSums(char *input, char *expected){
-  char result[100] = {'\0'};
+  char result[TEST_BUFFER_SIZE] = {'\0'};
   convertInternalSums(input, result);
   ck_assert_str_eq(result, expected);
 }
 
 static void assertConvertSubtractiveToAdditivePrefix(char *input, char *expected){
-  char result[100] = {'\0'};
+  char result[TEST_BUFFER_SIZE] = {'\0'};
   convertSubtractiveToAdditivePrefix(input, result);
   ck_assert_str_eq(result, expected);
 }
 
 static void assertConvertAdditiveToSubtractivePrefix(char *input, char *expected){
-  char result[100] = {'\0'};
+  char result[TEST_BUFFER_SIZE] = {'\0'};
   convertAdditiveToSubtractivePrefix(input, result);
   ck_assert_str_eq(result, expected);
 }

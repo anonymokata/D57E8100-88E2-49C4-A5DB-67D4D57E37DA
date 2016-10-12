@@ -1,5 +1,6 @@
 #include <check.h>
 #include "../main/common-utils.h"
+#include "test-constants.h"
 
 static void assertReplaceSubstring(char *inputString, char *subString, char *replaceWithString, char *expected);
 static void assertConcatenate(char *input1, char *input2, char *expected);
@@ -86,13 +87,13 @@ START_TEST(testGetRomanNumeralSortIndexUnknownReturnsNegativeOne)
 END_TEST
 
 static void assertReplaceSubstring(char *inputString, char *subString, char *replaceWithString, char *expected){
-  char result[100] = {'\0'};
+  char result[TEST_BUFFER_SIZE] = {'\0'};
   replaceSubstring(inputString, subString, replaceWithString, result);
   ck_assert_str_eq(result, expected);
 }
 
 static void assertConcatenate(char *input1, char *input2, char *expected){
-  char result[100] = {'\0'};
+  char result[TEST_BUFFER_SIZE] = {'\0'};
   concatenate(input1, input2 ,result);
   ck_assert_str_eq(result, expected);
 }

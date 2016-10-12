@@ -2,12 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../main/common-utils.h"
+#include "constants.h"
 
 static int compareRomanNumerals(const void * a, const void * b);
 
 const char *sortRomanNumerals(const char *romanNumerals, char result[])
 {
-  char romanNumeralsCopy[100] = {};
+  char romanNumeralsCopy[BUFFER_SIZE] = {};
   strcpy(romanNumeralsCopy, romanNumerals);
 
   qsort(romanNumeralsCopy, strlen(romanNumerals), sizeof(char), compareRomanNumerals);

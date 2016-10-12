@@ -1,5 +1,6 @@
 #include <check.h>
 #include "../main/roman-numerals-sorter.h"
+#include "test-constants.h"
 
 static void assertSortNumerals(char *input, char *expected);
 
@@ -20,7 +21,7 @@ START_TEST(testSortLongestRomanNumerals)
 END_TEST
 
 static void assertSortNumerals(char *input, char *expected){
-  char result[100] = {'\0'};
+  char result[TEST_BUFFER_SIZE] = {'\0'};
   sortRomanNumerals(input, result);
   ck_assert_str_eq(result, expected);
 }

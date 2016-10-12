@@ -5,6 +5,7 @@
 #include "roman-numerals-converter.h"
 #include "roman-numerals-reducer.h"
 #include "common-utils.h"
+#include "constants.h"
 
 static int hasInvalidBuffer(const char buffer[], const int size);
 
@@ -14,11 +15,11 @@ void add(const char *romanNumeral1, const char *romanNumeral2, char result[], co
       return;
     }
 
-    char additiveNumerals1[100] = {};
-    char additiveNumerals2[100] = {};
-    char combinedNumerals[100] = {};
-    char sortedNumerals[100] = {};
-    char internalSumsNumerals[100] = {};
+    char additiveNumerals1[BUFFER_SIZE] = {};
+    char additiveNumerals2[BUFFER_SIZE] = {};
+    char combinedNumerals[BUFFER_SIZE] = {};
+    char sortedNumerals[BUFFER_SIZE] = {};
+    char internalSumsNumerals[BUFFER_SIZE] = {};
 
     convertSubtractiveToAdditivePrefix(romanNumeral1, additiveNumerals1);
     convertSubtractiveToAdditivePrefix(romanNumeral2, additiveNumerals2);
@@ -33,9 +34,9 @@ void subtract(const char *romanNumeral1, const char *romanNumeral2, char result[
     return;
   }
 
-  char additiveNumerals1[100] = {};
-  char additiveNumerals2[100] = {};
-  char reducedNumerals[100] = {};
+  char additiveNumerals1[BUFFER_SIZE] = {};
+  char additiveNumerals2[BUFFER_SIZE] = {};
+  char reducedNumerals[BUFFER_SIZE] = {};
 
   convertSubtractiveToAdditivePrefix(romanNumeral1, additiveNumerals1);
   convertSubtractiveToAdditivePrefix(romanNumeral2, additiveNumerals2);
@@ -44,5 +45,5 @@ void subtract(const char *romanNumeral1, const char *romanNumeral2, char result[
 }
 
 int hasInvalidBuffer(const char buffer[], const int size){
-  return size < 100 || !buffer;
+  return size < BUFFER_SIZE || !buffer;
 }
