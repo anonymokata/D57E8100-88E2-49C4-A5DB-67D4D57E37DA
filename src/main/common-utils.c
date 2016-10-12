@@ -8,7 +8,6 @@ static char *makeBeforeSubstring(const char *inputStringCopy, const char *subStr
 static char *makeAfterSubstring(const char *inputStringCopy, const char *subString, char *afterSubstring);
 static int doesNotContainSubstring(const char *inputString, const char *subString);
 static void doReplace(const char *inputString, const char *subString, const char *replaceWithString, char result[]);
-static const int NUMERALS_ARRAY_SIZE = 7;
 static char sortedRomanNumerals[] = {'I','V','X','L','C','D','M'};
 
 void replaceSubstring(const char *inputString, const char *subString, const char *replaceWithString, char result[])
